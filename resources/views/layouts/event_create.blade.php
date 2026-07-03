@@ -4,7 +4,7 @@
 
 @section('content')
 
-<div class="container">
+<div class="event-container">
 
     <h1 class="page-title">
         旅行を募集する
