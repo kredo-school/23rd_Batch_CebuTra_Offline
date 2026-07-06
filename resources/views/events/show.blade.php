@@ -1,12 +1,18 @@
 @extends('layouys.app')
 
 @section('content')
+
+{{-- @php
+    $joined = $event->participants->count();
+    $remaining = $event->capacity - $joined;
+@endphp --}}
+
     <div class="event-show">
         {{-- Hero --}}
         <div class="event-hero">
             <img src="" alt="">
 
-            <a href="">
+            <a href="" class="close-button">
                 <i class="fa-solid fa-xmark"></i>
             </a>
             <button class="favorite-button">
@@ -105,7 +111,7 @@
         <h2>旅行の概要</h2>
 
         <p>
-            {{  }}//--
+            {{  }}
         </p>
 
     </section>
