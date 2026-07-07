@@ -46,4 +46,30 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function favoriteTrips() {
+        return $this->belongsToMany(Trip::class, 'favorites')->withTimestamps();
+    }
+
+    // すでにお気に入り登録しているか確認するメソッド
+    public function hasFavorited(Trip $trip) {
+        return $this->favoriteTrips()->where('trip_id', $trip->id)->exists();
+    }
+
+    protected $fillable = [
+        'name',
+        'email',
+        'password',
+        'gender',
+        'nationality',
+        'native_language',
+        'school',
+        'english_level',
+        'residing_area',
+        'stay_duration',
+        'hobbies',
+        'avatar_path',
+    ];
 }
+
+    
