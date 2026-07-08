@@ -1,0 +1,277 @@
+/* ---------- ページ全体 ---------- */
+
+.itinerary-page{
+    max-width:900px;
+    margin:0 auto;
+    padding:24px 20px 100px;
+}
+
+.page-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    margin-bottom:28px;
+}
+
+.page-header h1{
+    font-size:30px;
+    font-weight:700;
+    color:#202124;
+}
+
+.page-header p{
+    margin-top:8px;
+    color:#7b7b7b;
+    font-size:15px;
+    line-height:1.6;
+}
+
+/* ---------- 新規作成 ---------- */
+
+.create-btn{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    background:#0E7490;
+
+    color:white;
+
+    border:none;
+
+    border-radius:12px;
+
+    padding:14px 20px;
+
+    cursor:pointer;
+
+    transition:.25s;
+}
+
+.create-btn:hover{
+
+    background:#155e75;
+
+}
+
+/* ---------- カード ---------- */
+.trip-list{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:20px;
+
+}
+
+.trip-card{
+
+    background:white;
+
+    border-radius:18px;
+
+    overflow:hidden;
+
+    box-shadow:0 5px 18px rgba(0,0,0,.08);
+
+    transition:.25s;
+
+}
+
+.trip-card:hover{
+
+    transform:translateY(-3px);
+
+}
+
+/* ---------- カード上部 ---------- */
+.trip-card-top{
+
+    height:70px;
+
+    background:linear-gradient(
+        90deg,
+        #14B8A6,
+        #06B6D4
+    );
+
+}
+
+/* ---------- カード本文 ---------- */
+.trip-card-body{
+
+    padding:22px;
+
+}
+
+.trip-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:flex-start;
+
+}
+
+.trip-header h2{
+
+    font-size:22px;
+
+    margin-bottom:5px;
+
+}
+
+.trip-header p{
+
+    color:#777;
+
+    font-size:14px;
+
+}
+
+/* ---------- 編集・削除 ---------- */
+.trip-action{
+
+    display:flex;
+
+    gap:18px;
+
+}
+
+.trip-action a{
+
+    color:#666;
+
+}
+
+.trip-action button{
+
+    background:none;
+
+    border:none;
+
+    cursor:pointer;
+
+    color:#ef4444;
+
+}
+
+/* ---------- Dayタグ ---------- */
+.day-row{
+
+    margin-top:18px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    flex-wrap:wrap;
+
+}
+
+.day-badge{
+
+    background:#14B8A6;
+
+    color:white;
+
+    padding:6px 12px;
+
+    border-radius:999px;
+
+    font-size:13px;
+
+}
+
+.tag{
+
+    background:#F3F4F6;
+
+    border-radius:999px;
+
+    padding:7px 12px;
+
+    font-size:13px;
+
+}
+
+/* ---------- モーダル ---------- */
+.modal{
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,.45);
+
+    display:none;
+
+    justify-content:center;
+
+    align-items:center;
+
+    z-index:100;
+
+}
+
+.modal.show{
+
+    display:flex;
+
+}
+
+/* ---------- モーダル本体 ---------- */
+.modal-content{
+
+    width:420px;
+
+    background:white;
+
+    border-radius:18px;
+
+    padding:30px;
+
+}
+
+/* ---------- 入力欄 ---------- */
+.modal-content input{
+
+    width:100%;
+
+    padding:14px;
+
+    border-radius:10px;
+
+    border:1px solid #ddd;
+
+    margin-top:18px;
+
+}
+
+/* ---------- 作成ボタン ---------- */
+.submit-btn{
+
+    width:100%;
+
+    margin-top:24px;
+
+    background:#0E7490;
+
+    color:white;
+
+    border:none;
+
+    border-radius:10px;
+
+    padding:14px;
+
+    cursor:pointer;
+
+}
