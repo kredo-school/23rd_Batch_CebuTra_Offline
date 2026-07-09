@@ -3,6 +3,7 @@
 use App\Http\Controllers\TripController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\ProfileController;
+//use App\Http\Controllers\EventController;
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/', [TripController::class, 'index'])->name('home');
@@ -14,7 +15,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
 });
-    
+
     // プロフィール用（Breeze標準を想定）
 //     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
 
@@ -32,3 +33,7 @@ Route::middleware(['auth'])->group(function () {
 // Auth::routes();
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+#EventRecruitPage
+Route::get('/events',[EventController::class,'index'])->name('events.index');
+Route::post('/events/store',{EventController::class,'store'})->name('events.store');
