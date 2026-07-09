@@ -12,7 +12,8 @@
 @endsection
 
 @section('form')
-<form action=""> //route
+<form method="POST"
+action="{{ route('events.create.step1') }}"> //route
     @csrf
     <label for="trip_title">旅行タイトル</label>
     <input type="text" id="trip_title" name="trip_title" placeholder="例：スミロン島日帰りトリップ">

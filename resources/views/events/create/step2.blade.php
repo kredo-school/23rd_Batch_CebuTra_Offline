@@ -12,7 +12,7 @@
 @endsection
 
 @section('form')
-<form action=""> //route
+<form method="POST"> //
 @csrf
 
 <h3>募集人数</h3>
@@ -44,7 +44,7 @@
 </div>
 
 <div class="button-group">
-    <a href="" class="btn-outline">戻る</a> //route
+    <a href="{{ route('events.create.step1') }}" class="btn-outline">戻る</a> //
     <button class="btn-primary">次へ進む</button>
 </div>
 
