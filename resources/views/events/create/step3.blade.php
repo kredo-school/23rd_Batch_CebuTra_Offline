@@ -11,7 +11,7 @@
 @endsection
 
 @section('form')
-<form method="POST" action="">
+<form method="POST">
 @csrf
 <label for="attach">
 
@@ -29,7 +29,7 @@
 @endforeach
 
 <div class="button-group">
-<a href="">戻る</a>
+<a href="{{ route('events.create.step2') }}">戻る</a>
 
 <button class="btn-primary">次へ進む</button>
 

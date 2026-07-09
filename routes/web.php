@@ -4,6 +4,7 @@ use App\Http\Controllers\TripController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\ProfileController;
 //use App\Http\Controllers\EventController;
+//use App\Http\Controllers\EventCreateController;
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/', [TripController::class, 'index'])->name('home');
@@ -34,6 +35,15 @@ Route::middleware(['auth'])->group(function () {
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-#EventRecruitPage
+#イベント一覧ページ
 Route::get('/events',[EventController::class,'index'])->name('events.index');
 Route::post('/events/store',{EventController::class,'store'})->name('events.store');
+#イベント作成ページ
+Route::get('/events/create/step1',[EventCreateController::class,'step1'])->name('events.create.step1');
+Route::post('/events/create/step1',[EventCreateController::class,'storestep1'])->name('storestep1');
+Route::get('/events/create/step2',[EventCreateController::class,'step2'])->name('events.create.step2');
+Route::post('/events/create/step2',[EventCreateController::class,'storestep2'])->name('storestep2');
+Route::get('/events/create/step3',[EventCreateController::class,'step3'])->name('events.create.step3');
+Route::post('/events/create/step3',[EventCreateController::class,'storestep3'])->name('storestep3');
+Route::get('/events/create/step4',[EventCreateController::class,'step4'])->name('events.create.step4');
+Route::post('/events/create/step4',[EventCreateController::class,'storestep4'])->name('storestep4');
