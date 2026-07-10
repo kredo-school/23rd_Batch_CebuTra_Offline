@@ -10,9 +10,9 @@
     <div class="event-show">
         {{-- Hero --}}
         <div class="event-hero">
-            <img src="" alt="">
+            <img src="{{ asset('storage/'.$event->image_path) }}" alt="{{ $event->title }}">//
 
-            <a href="" class="close-button">
+            <a href="{{ route('events.index') }}" class="close-button">
                 <i class="fa-solid fa-xmark"></i>
             </a>
             <button class="favorite-button">
@@ -23,13 +23,13 @@
                 <div class="tag-group">
                     @foreach ($event->tags as $tag)
                         <span class="event-tag">
-                            {{ }}//
+                            {{ $tag->name }}//
                         </span>
                     @endforeach
                 </div>
 
                 <h1>
-                    {{ }}//
+                    {{ $event->title }}//
                 </h1>
 
             </div>
@@ -40,23 +40,23 @@
     <div class="event-meta">
         <span>
             <i class="fa-solid fa-location-dot"></i>
-            {{ }}//
+            {{ $event->location }}//
         </span>
 
         <span class="remaining">
             <i class="fa-solid fa-user-group"></i>
-            残り{{ }}名 //
+            残り{{ $remaining }}名 //
         </span>
 
     </div>
     {{-- 主催者 --}}
     <div class="organizer-card">
         <div class="avatar">
-            {{ }}//
+            {{ $event->rating }}//
         </div>
 
         <div>
-            <h3{{ }}>
+            <h3{{ $event->user->name }}>
                 </h3>//
 
                 <p>主催者</p>
@@ -69,7 +69,7 @@
     <section class="section">
         <h2>概要</h2>
 
-        <p>{{ }}</p>//
+        <p>{{ $event->description }}</p>//
 
     </section>
 
@@ -80,7 +80,7 @@
             集合場所
         </div>
 
-        <p>{{ }}</p>//
+        <p>{{ $event->meeting_place }}</p>//
 
     </section>
 
@@ -92,14 +92,14 @@
             <div class="timeline-item">
 
                 <div class="timeline-icon">
-                    {{ }}/
+                    {{ $item->icon }}/
                 </div>
 
                 <span class="timeline-time">
-                    {{ }}//
+                    {{ $item->time }}//
                 </span>
 
-                <p>{{ }}</p>//
+                <p>{{ $item->description }}</p>//
 
             </div>
         @endforeach
@@ -111,7 +111,7 @@
         <h2>旅行の概要</h2>
 
         <p>
-            {{  }}
+            {{ $item->name }}//
         </p>
 
     </section>
@@ -122,23 +122,23 @@
             <h2>参加状況</h2>
 
             <span>
-                残り{{  }}名
+                残り{{ $remaining }}名
             </span>
         </div>
 
         <div class="progress-group">
-            @for ()//
-            <div class="progress-item{{  }}">
+            @for ($i = 1; $i <= $event->capacity;$i++)//
+            <div class="progress-item{{ $i <= $joined ? 'active' : '' }}">
             </div>
             @endfor
         </div>
 
-        <p>{{  }}名参加済み</p>//
+        <p>{{ $joined }}/{{ $event->capacity }}名参加済み</p>//
     </section>
 
     {{-- 参加申請ボタン --}}
     <div class="bottom-action">
-        <form action="" method="POST">//
+        <form action="{{ route('events.join',$event) }}" method="POST">//
             @csrf
             <button type="submit" class="join-button">
                 参加申請する
