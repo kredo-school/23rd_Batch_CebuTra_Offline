@@ -12,19 +12,19 @@
     <div class="trip-header">
         <div>
 
-            <h2>{{  }}</h2>//
+            <h2>{{ $trip->title }}</h2>//
 
             <p>
-                {{  }}日間
-                {{  }}件
-                {{  }}作成
+                {{ $trip->days }}日間
+                {{ $trip->items->count() }}件
+                {{ $trip->created_at->format('n月j日') }}作成
             </p>
 
         </div>
 
         <div class="trip-action">
-            <a href="{{  }}"><i class="fa-solid fa-pen"></i></a>
-            <form action="{{  }}" method="POST">
+            <a href="{{ route('itineraries.edit',$trip) }}"><i class="fa-solid fa-pen"></i></a>
+            <form action="{{ route('itineraries.destroy',$trip) }}" method="POST">
 
                 @csrf
                 @method('DELETE')
@@ -39,15 +39,15 @@
     <div class="day-row">
         <span class="day-badge">
 
-            Day{{  }}//
+            Day{{ $day }}//
 
         </span>
 
         @foreach ($items->take(3) as $item)
 
         <span class="tag">
-            {{  }}//
-            {{  }}//
+            {{ $item->icon }}//
+            {{ $item->title }}//
         </span>
 
         @endforeach
@@ -55,7 +55,7 @@
         @if ($items->count()->3)
 
         <span class="tag">
-            +{{  }}//
+            +{{ $items->count()-3 }}//
         </span>
 
         @endif

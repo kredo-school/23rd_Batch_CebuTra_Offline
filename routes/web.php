@@ -6,6 +6,8 @@ use App\Http\Controllers\ProfileController;
 //use App\Http\Controllers\EventController;
 //use App\Http\Controllers\EventCreateController;
 //use App\Http\Controllers\TripController;
+//use App\Http\Controllers\ItineraryController;
+//use App\Http\Controllers\ItineraryItemController;
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/', [TripController::class, 'index'])->name('home');
@@ -50,3 +52,12 @@ Route::get('/events/create/step4',[EventCreateController::class,'step4'])->name(
 Route::post('/events/create/step4',[EventCreateController::class,'storestep4'])->name('storestep4');
 #イベント詳細ページ
 Route::get('/events/{id}',[EventController::class,'show'])->name('events.show');
+#旅程作成ページ
+Route:middleware('auth')->group(function(){
+    //旅程
+    Route::resource('itineraries',ItineraryController::class);
+    //アクティビティ
+    Route::post('/itineraries/{trip}/items',[ItineraryItemController::class,'store'])->name('items.store');
+    Route::put('/items/{item}',[ItineraryItemController::class,'update'])->name('items.update')
+    Route::delete('/items/{item}',[ItineraryItemController::class,'destroy'])->name('items.destroy');
+});
