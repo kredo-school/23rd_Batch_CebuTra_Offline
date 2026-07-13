@@ -9,13 +9,13 @@
         {{-- 戻る --}}
         <div class="editor-header">
 
-            <a href="{{ }}" class="back-btn">
+            <a href="{{ route('itineraries.index') }}" class="back-btn">//
                 <i class="fa-solid fa-chevron-left"></i>
             </a>
 
 
             <div class="trip-title">
-                <input type="text" value="{{ }}" class="title-input">//
+                <input type="text" value="{{ $trip->title }}" class="title-input">//
 
                 <p>タップして名前を編集</p>
 
