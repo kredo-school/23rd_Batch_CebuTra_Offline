@@ -40,7 +40,7 @@ Route::middleware(['auth'])->group(function () {
 
 #イベント一覧ページ
 Route::get('/events',[EventController::class,'index'])->name('events.index');
-Route::post('/events/store',{EventController::class,'store'})->name('events.store');
+Route::post('/events/store',[EventController::class,'store'])->name('events.store');
 #イベント作成ページ
 Route::get('/events/create/step1',[EventCreateController::class,'step1'])->name('events.create.step1');
 Route::post('/events/create/step1',[EventCreateController::class,'storestep1'])->name('storestep1');
@@ -53,11 +53,11 @@ Route::post('/events/create/step4',[EventCreateController::class,'storestep4'])-
 #イベント詳細ページ
 Route::get('/events/{id}',[EventController::class,'show'])->name('events.show');
 #旅程作成ページ
-Route:middleware('auth')->group(function(){
+Route::middleware('auth')->group(function(){
     //旅程
     Route::resource('itineraries',ItineraryController::class);
     //アクティビティ
     Route::post('/itineraries/{trip}/items',[ItineraryItemController::class,'store'])->name('items.store');
-    Route::put('/items/{item}',[ItineraryItemController::class,'update'])->name('items.update')
+    Route::put('/items/{item}',[ItineraryItemController::class,'update'])->name('items.update');
     Route::delete('/items/{item}',[ItineraryItemController::class,'destroy'])->name('items.destroy');
 });
