@@ -7,7 +7,16 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\EventCreateController;
 use App\Http\Controllers\ItineraryController;
 use App\Http\Controllers\ItineraryItemController;
-
+Route::get('/login', function () {
+    return view('auth.login');
+})->name('login');
+// Password reset request route (placeholder)
+Route::get('/password/request', function () {
+    return view('auth.passwords.email');
+})->name('password.request');
+Route::get('/register', function () {
+    return view('auth.register');
+})->name('register');
 Route::middleware(['auth'])->group(function () {
     Route::get('/', [TripController::class, 'index'])->name('home');
     Route::get('/search', [TripController::class, 'search'])->name('trips.search');
