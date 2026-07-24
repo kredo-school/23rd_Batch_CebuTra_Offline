@@ -109,9 +109,9 @@
   array (
     'paths' => 
     array (
-      0 => 'C:\\Users\\kj-acer\\Desktop\\23rd_Batch_CebuTra_Offline\\resources\\views',
+      0 => 'C:\\Users\\Bokuren\\Desktop\\23rd_Batch_CebuTra_Offline\\resources\\views',
     ),
-    'compiled' => 'C:\\Users\\kj-acer\\Desktop\\23rd_Batch_CebuTra_Offline\\storage\\framework\\views',
+    'compiled' => 'C:\\Users\\Bokuren\\Desktop\\23rd_Batch_CebuTra_Offline\\storage\\framework\\views',
   ),
   'app' => 
   array (
@@ -126,7 +126,7 @@
     'fallback_locale' => 'en',
     'faker_locale' => 'en_US',
     'cipher' => 'AES-256-CBC',
-    'key' => 'base64:fmCkJa4ESZZ+sagsU6X1DOa4QPUgeVcUabKtZswyegs=',
+    'key' => 'base64:x5paymTd6Xx3x4BFnz3AMIhCmCFsVViHVad6riC50zo=',
     'previous_keys' => 
     array (
     ),
@@ -273,8 +273,8 @@
       'file' => 
       array (
         'driver' => 'file',
-        'path' => 'C:\\Users\\kj-acer\\Desktop\\23rd_Batch_CebuTra_Offline\\storage\\framework/cache/data',
-        'lock_path' => 'C:\\Users\\kj-acer\\Desktop\\23rd_Batch_CebuTra_Offline\\storage\\framework/cache/data',
+        'path' => 'C:\\Users\\Bokuren\\Desktop\\23rd_Batch_CebuTra_Offline\\storage\\framework/cache/data',
+        'lock_path' => 'C:\\Users\\Bokuren\\Desktop\\23rd_Batch_CebuTra_Offline\\storage\\framework/cache/data',
       ),
       'memcached' => 
       array (
@@ -331,14 +331,14 @@
   ),
   'database' => 
   array (
-    'default' => 'sqlite',
+    'default' => 'mysql',
     'connections' => 
     array (
       'sqlite' => 
       array (
         'driver' => 'sqlite',
         'url' => NULL,
-        'database' => 'C:\\Users\\kj-acer\\Desktop\\23rd_Batch_CebuTra_Offline\\database\\database.sqlite',
+        'database' => 'CebTra_GI',
         'prefix' => '',
         'foreign_key_constraints' => true,
         'busy_timeout' => NULL,
@@ -352,7 +352,7 @@
         'url' => NULL,
         'host' => '127.0.0.1',
         'port' => '3306',
-        'database' => 'laravel',
+        'database' => 'CebTra_GI',
         'username' => 'root',
         'password' => '',
         'unix_socket' => '',
@@ -372,7 +372,7 @@
         'url' => NULL,
         'host' => '127.0.0.1',
         'port' => '3306',
-        'database' => 'laravel',
+        'database' => 'CebTra_GI',
         'username' => 'root',
         'password' => '',
         'unix_socket' => '',
@@ -391,8 +391,8 @@
         'driver' => 'pgsql',
         'url' => NULL,
         'host' => '127.0.0.1',
-        'port' => '5432',
-        'database' => 'laravel',
+        'port' => '3306',
+        'database' => 'CebTra_GI',
         'username' => 'root',
         'password' => '',
         'charset' => 'utf8',
@@ -405,9 +405,9 @@
       array (
         'driver' => 'sqlsrv',
         'url' => NULL,
-        'host' => 'localhost',
-        'port' => '1433',
-        'database' => 'laravel',
+        'host' => '127.0.0.1',
+        'port' => '3306',
+        'database' => 'CebTra_GI',
         'username' => 'root',
         'password' => '',
         'charset' => 'utf8',
@@ -465,7 +465,7 @@
       'local' => 
       array (
         'driver' => 'local',
-        'root' => 'C:\\Users\\kj-acer\\Desktop\\23rd_Batch_CebuTra_Offline\\storage\\app/private',
+        'root' => 'C:\\Users\\Bokuren\\Desktop\\23rd_Batch_CebuTra_Offline\\storage\\app/private',
         'serve' => true,
         'throw' => false,
         'report' => false,
@@ -473,7 +473,7 @@
       'public' => 
       array (
         'driver' => 'local',
-        'root' => 'C:\\Users\\kj-acer\\Desktop\\23rd_Batch_CebuTra_Offline\\storage\\app/public',
+        'root' => 'C:\\Users\\Bokuren\\Desktop\\23rd_Batch_CebuTra_Offline\\storage\\app/public',
         'url' => 'http://localhost/storage',
         'visibility' => 'public',
         'throw' => false,
@@ -495,7 +495,7 @@
     ),
     'links' => 
     array (
-      'C:\\Users\\kj-acer\\Desktop\\23rd_Batch_CebuTra_Offline\\public\\storage' => 'C:\\Users\\kj-acer\\Desktop\\23rd_Batch_CebuTra_Offline\\storage\\app/public',
+      'C:\\Users\\Bokuren\\Desktop\\23rd_Batch_CebuTra_Offline\\public\\storage' => 'C:\\Users\\Bokuren\\Desktop\\23rd_Batch_CebuTra_Offline\\storage\\app/public',
     ),
   ),
   'logging' => 
@@ -520,14 +520,14 @@
       'single' => 
       array (
         'driver' => 'single',
-        'path' => 'C:\\Users\\kj-acer\\Desktop\\23rd_Batch_CebuTra_Offline\\storage\\logs/laravel.log',
+        'path' => 'C:\\Users\\Bokuren\\Desktop\\23rd_Batch_CebuTra_Offline\\storage\\logs/laravel.log',
         'level' => 'debug',
         'replace_placeholders' => true,
       ),
       'daily' => 
       array (
         'driver' => 'daily',
-        'path' => 'C:\\Users\\kj-acer\\Desktop\\23rd_Batch_CebuTra_Offline\\storage\\logs/laravel.log',
+        'path' => 'C:\\Users\\Bokuren\\Desktop\\23rd_Batch_CebuTra_Offline\\storage\\logs/laravel.log',
         'level' => 'debug',
         'days' => 14,
         'replace_placeholders' => true,
@@ -592,7 +592,7 @@
       ),
       'emergency' => 
       array (
-        'path' => 'C:\\Users\\kj-acer\\Desktop\\23rd_Batch_CebuTra_Offline\\storage\\logs/laravel.log',
+        'path' => 'C:\\Users\\Bokuren\\Desktop\\23rd_Batch_CebuTra_Offline\\storage\\logs/laravel.log',
       ),
     ),
   ),
@@ -670,7 +670,7 @@
       'theme' => 'default',
       'paths' => 
       array (
-        0 => 'C:\\Users\\kj-acer\\Desktop\\23rd_Batch_CebuTra_Offline\\resources\\views/vendor/mail',
+        0 => 'C:\\Users\\Bokuren\\Desktop\\23rd_Batch_CebuTra_Offline\\resources\\views/vendor/mail',
       ),
       'extensions' => 
       array (
@@ -744,13 +744,13 @@
     ),
     'batching' => 
     array (
-      'database' => 'sqlite',
+      'database' => 'mysql',
       'table' => 'job_batches',
     ),
     'failed' => 
     array (
       'driver' => 'database-uuids',
-      'database' => 'sqlite',
+      'database' => 'mysql',
       'table' => 'failed_jobs',
     ),
   ),
@@ -785,7 +785,7 @@
     'lifetime' => 120,
     'expire_on_close' => false,
     'encrypt' => false,
-    'files' => 'C:\\Users\\kj-acer\\Desktop\\23rd_Batch_CebuTra_Offline\\storage\\framework/sessions',
+    'files' => 'C:\\Users\\Bokuren\\Desktop\\23rd_Batch_CebuTra_Offline\\storage\\framework/sessions',
     'connection' => NULL,
     'table' => 'sessions',
     'store' => NULL,
