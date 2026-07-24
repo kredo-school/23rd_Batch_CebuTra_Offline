@@ -8,6 +8,9 @@ use App\Http\Controllers\TripController;
 use App\Http\Controllers\FavoriteController;
 //use App\Http\Controllers\EventController;
 //use App\Http\Controllers\EventCreateController;
+//use App\Http\Controllers\TripController;
+//use App\Http\Controllers\ItineraryController;
+//use App\Http\Controllers\ItineraryItemController;
 
 
 

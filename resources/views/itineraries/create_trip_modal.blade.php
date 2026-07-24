@@ -9,7 +9,7 @@
 
         <p>後から変更できます</p>
 
-        <form action="{{ }}" method="POST">
+        <form action="{{ route('itineraries.store') }}" method="POST">//
 
             @csrf
 
@@ -17,7 +17,7 @@
 
             <button class="submit-btn">作成する</button>
         </form>
-        
+
     </div>
 </div>
 
