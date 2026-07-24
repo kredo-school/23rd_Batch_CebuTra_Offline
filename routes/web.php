@@ -3,11 +3,10 @@
 use App\Http\Controllers\TripController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\ProfileController;
-//use App\Http\Controllers\EventController;
-//use App\Http\Controllers\EventCreateController;
-//use App\Http\Controllers\TripController;
-//use App\Http\Controllers\ItineraryController;
-//use App\Http\Controllers\ItineraryItemController;
+use App\Http\Controllers\EventController;
+use App\Http\Controllers\EventCreateController;
+use App\Http\Controllers\ItineraryController;
+use App\Http\Controllers\ItineraryItemController;
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/', [TripController::class, 'index'])->name('home');
@@ -16,8 +15,17 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/trips/{id}/join', [TripController::class, 'join'])->name('trips.join');
     // 非同期で叩くためのルート
     Route::post('/trips/{id}/favorite', [FavoriteController::class, 'toggle'])->name('trips.favorite');
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
+    Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+
+    // Settings Routes
+    Route::get('/settings', [ProfileController::class, 'settings'])->name('settings.all');
+    Route::get('/settings/emergency', [ProfileController::class, 'emergency'])->name('settings.emergency');
+    Route::get('/settings/help', [ProfileController::class, 'help'])->name('settings.help');
+    Route::get('/settings/instagram', [ProfileController::class, 'instagram'])->name('settings.instagram');
+    Route::get('/settings/language', [ProfileController::class, 'language'])->name('settings.language');
+    Route::get('/settings/terms', [ProfileController::class, 'terms'])->name('settings.terms');
 });
 
     // プロフィール用（Breeze標準を想定）
@@ -40,7 +48,7 @@ Route::middleware(['auth'])->group(function () {
 
 #イベント一覧ページ
 Route::get('/events',[EventController::class,'index'])->name('events.index');
-Route::post('/events/store',{EventController::class,'store'})->name('events.store');
+Route::post('/events/store',[EventController::class,'store'])->name('events.store');
 #イベント作成ページ
 Route::get('/events/create/step1',[EventCreateController::class,'step1'])->name('events.create.step1');
 Route::post('/events/create/step1',[EventCreateController::class,'storestep1'])->name('storestep1');
@@ -53,11 +61,11 @@ Route::post('/events/create/step4',[EventCreateController::class,'storestep4'])-
 #イベント詳細ページ
 Route::get('/events/{id}',[EventController::class,'show'])->name('events.show');
 #旅程作成ページ
-Route:middleware('auth')->group(function(){
+Route::middleware('auth')->group(function(){
     //旅程
     Route::resource('itineraries',ItineraryController::class);
     //アクティビティ
     Route::post('/itineraries/{trip}/items',[ItineraryItemController::class,'store'])->name('items.store');
-    Route::put('/items/{item}',[ItineraryItemController::class,'update'])->name('items.update')
+    Route::put('/items/{item}',[ItineraryItemController::class,'update'])->name('items.update');
     Route::delete('/items/{item}',[ItineraryItemController::class,'destroy'])->name('items.destroy');
 });
