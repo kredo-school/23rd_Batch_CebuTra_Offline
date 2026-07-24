@@ -2,7 +2,7 @@
     <div class="modal-content">
         <h2>アクティビティを追加</h2>
 
-        <form action="{{ }}" method="POST">
+        <form action="{{ route('items.store',$trip) }}" method="POST">
             @csrf
             <div class="input-row">
 

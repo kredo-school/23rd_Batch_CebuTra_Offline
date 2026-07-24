@@ -1,137 +1,200 @@
-@extends('layouts.app')
+@extends('layouts.mobile')
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+@section('title', 'CebuTra - Home')
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+@section('main-class', 'flex-1 overflow-y-auto no-scrollbar p-5 pt-1 space-y-6 pb-28')
 
-                    {{ __('You are logged in!') }}
-                </div>
-            </div>
-        </div>
+@section('header')
+<div class="bg-[#FFFBF3] pt-10 px-5 pb-2 z-20 flex-shrink-0">
+  <div class="flex justify-between items-center">
+    <div class="flex items-center space-x-2">
+      <div class="w-10 h-10 bg-[#008080] rounded-xl flex items-center justify-center shadow-sm">
+        <span class="text-white font-bold text-2xl">C</span>
+      </div>
+      <div>
+        <h1 class="text-xl font-bold tracking-tight text-[#333] flex items-center">
+          <span class="text-[#008080]">Cebu</span><span class="text-[#FF6347]">Tra</span>
+        </h1>
+        <p class="text-[10px] text-gray-400 font-bold tracking-wider -mt-1 uppercase">Cebu Travel</p>
+      </div>
     </div>
+    <button class="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-sm border border-gray-100 relative">
+      <i class="fa-regular fa-bell text-gray-700 text-lg"></i>
+      <span class="absolute top-2 right-2.5 w-2 h-2 bg-[#FF6347] rounded-full"></span>
+    </button>
+  </div>
 </div>
 @endsection
 
+@section('content')
+<!-- Weather Forecast Widget -->
+<div class="bg-gradient-to-br from-[#007A87] to-[#0193A1] text-white rounded-3xl p-5 shadow-md relative overflow-hidden">
+  <p class="text-sm font-medium opacity-90">セブ島 · 今日</p>
+  <div class="flex items-baseline mt-1">
+    <span class="text-5xl font-bold tracking-tighter">32°</span>
+    <span class="text-xl opacity-70 ml-1">/ 26°</span>
+  </div>
+  <p class="text-base font-medium mt-1">晴れ</p>
+  
+  <div class="flex space-x-4 mt-4 text-xs opacity-90">
+    <span class="flex items-center gap-1"><i class="fa-solid fa-droplet text-[10px]"></i> 湿度 78%</span>
+    <span class="flex items-center gap-1"><i class="fa-solid fa-wind text-[10px]"></i> 風 12km/h</span>
+    <span class="flex items-center gap-1"><i class="fa-solid fa-wave-square text-[10px]"></i> 波高 0.5m</span>
+  </div>
 
+  <div class="absolute right-6 top-6 text-6xl text-[#FFB03A] drop-shadow-md">
+    <i class="fa-solid fa-sun"></i>
+  </div>
+</div>
 
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CebuTra - Cebu Travel</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <script src="https://kit.fontawesome.com/your-code.js" crossorigin="anonymous"></script>
-</head>
-<body class="bg-amber-50 text-slate-800 font-sans pb-24"> <header class="flex justify-between items-center p-4 bg-transparent">
-        <div class="flex items-center space-x-2">
-            <div class="bg-teal-600 text-white p-2 rounded-xl font-bold text-xl">C</div>
-            <div>
-                <h1 class="text-xl font-black text-teal-600 tracking-tight">Cebu<span class="text-orange-500">Tra</span></h1>
-                <p class="text-xs text-gray-400 font-bold">CEBU TRAVEL</p>
-            </div>
+<div class="flex space-x-3 overflow-x-auto no-scrollbar py-1 flex-shrink-0">
+  <div class="min-w-[56px] bg-white rounded-2xl p-2 text-center shadow-sm flex flex-col items-center justify-between border border-[#008080]/30">
+    <p class="text-[11px] text-[#008080] font-bold">今日</p>
+    <i class="fa-solid fa-sun text-[#FFB03A] my-2 text-lg"></i>
+    <p class="text-sm font-bold text-gray-800">32°</p>
+    <p class="text-[10px] text-gray-400">26°</p>
+    <p class="text-[10px] text-[#3B82F6] font-medium mt-1"><i class="fa-solid fa-cloud-rain text-[8px]"></i> 5%</p>
+  </div>
+  <div class="min-w-[56px] bg-white rounded-2xl p-2 text-center shadow-sm flex flex-col items-center justify-between">
+    <p class="text-[11px] text-gray-500 font-medium">明日</p>
+    <i class="fa-solid fa-cloud-sun text-[#FFB03A] my-2 text-lg"></i>
+    <p class="text-sm font-bold text-gray-800">31°</p>
+    <p class="text-[10px] text-gray-400">25°</p>
+    <p class="text-[10px] text-[#3B82F6] font-medium mt-1"><i class="fa-solid fa-cloud-rain text-[8px]"></i> 10%</p>
+  </div>
+  <div class="min-w-[56px] bg-white rounded-2xl p-2 text-center shadow-sm flex flex-col items-center justify-between">
+    <p class="text-[11px] text-gray-500 font-medium">水</p>
+    <i class="fa-solid fa-cloud-sun-rain text-amber-500 my-2 text-lg"></i>
+    <p class="text-sm font-bold text-gray-800">29°</p>
+    <p class="text-[10px] text-gray-400">25°</p>
+    <p class="text-[10px] text-[#3B82F6] font-medium mt-1"><i class="fa-solid fa-cloud-rain text-[8px]"></i> 30%</p>
+  </div>
+  <div class="min-w-[56px] bg-white rounded-2xl p-2 text-center shadow-sm flex flex-col items-center justify-between">
+    <p class="text-[11px] text-gray-500 font-medium">木</p>
+    <i class="fa-solid fa-cloud-showers-heavy text-blue-400 my-2 text-lg"></i>
+    <p class="text-sm font-bold text-gray-800">27°</p>
+    <p class="text-[10px] text-gray-400">24°</p>
+    <p class="text-[10px] text-[#3B82F6] font-medium mt-1"><i class="fa-solid fa-cloud-rain text-[8px]"></i> 80%</p>
+  </div>
+  <div class="min-w-[56px] bg-white rounded-2xl p-2 text-center shadow-sm flex flex-col items-center justify-between">
+    <p class="text-[11px] text-gray-500 font-medium">金</p>
+    <i class="fa-solid fa-cloud-rain text-blue-400 my-2 text-lg"></i>
+    <p class="text-sm font-bold text-gray-800">28°</p>
+    <p class="text-[10px] text-gray-400">24°</p>
+    <p class="text-[10px] text-[#3B82F6] font-medium mt-1"><i class="fa-solid fa-cloud-rain text-[8px]"></i> 50%</p>
+  </div>
+</div>
+
+<!-- Spot Map Widget -->
+<div class="space-y-3">
+  <div class="flex justify-between items-center px-1">
+    <h2 class="text-lg font-bold text-[#2C3E50]">Spot Map</h2>
+    <span class="text-xs text-gray-400 flex items-center gap-1"><i class="fa-solid fa-location-dot"></i> Cebu</span>
+  </div>
+  
+  <div class="flex space-x-2 overflow-x-auto no-scrollbar py-1">
+    <button onclick="zoomToLocation(10.3168, 123.9911, 12)" class="flex items-center gap-1 bg-white px-4 py-2 rounded-full text-xs font-bold text-gray-700 shadow-sm border border-gray-100 whitespace-nowrap cursor-pointer">
+      🏖️ マクタン島
+    </button>
+    <button onclick="zoomToLocation(10.3157, 123.8854, 12)" class="flex items-center gap-1 bg-white px-4 py-2 rounded-full text-xs font-bold text-gray-700 shadow-sm border border-gray-100 whitespace-nowrap cursor-pointer">
+      🏙️ セブシティ
+    </button>
+    <button onclick="zoomToLocation(11.1620, 123.7319, 11)" class="flex items-center gap-1 bg-white px-4 py-2 rounded-full text-xs font-bold text-gray-700 shadow-sm border border-gray-100 whitespace-nowrap cursor-pointer">
+      🌴 バンタヤン島
+    </button>
+  </div>
+
+  <div id="map" class="w-full h-52 rounded-2xl shadow-inner border border-gray-100 overflow-hidden z-10">
+    <div class="w-full h-full bg-gray-200 flex flex-col items-center justify-center text-gray-500 p-4 text-center text-xs">
+      <i class="fa-solid fa-map-marked-alt text-3xl mb-2 text-gray-400"></i>
+      <p class="font-bold">Google Maps を読み込み中...</p>
+      <p class="opacity-75 mt-1">※APIキーを設定するとマップが有効になります</p>
+    </div>
+  </div>
+</div>
+
+<!-- Upcoming Trips Widget -->
+<div class="space-y-3">
+  <div class="flex justify-between items-center px-1">
+    <h2 class="text-lg font-bold text-[#2C3E50]">Upcoming Trips</h2>
+    <span class="bg-[#E0F2F1] text-[#008080] text-xs font-bold px-2.5 py-0.5 rounded-full">{{ $upcomingTrips->count() }}</span>
+  </div>
+
+  <div class="space-y-3">
+    @foreach($upcomingTrips as $trip)
+    <div onclick="window.location.href='{{ route('itineraries.show', $trip->id ?? 1) }}'" class="bg-gradient-to-r from-[#14939B] to-[#0D7880] text-white p-4 rounded-2xl shadow-sm relative flex items-center justify-between cursor-pointer active:scale-[0.99] transition-transform">
+      <div class="space-y-1">
+        <span class="text-[10px] opacity-75 block font-medium">In {{ \Carbon\Carbon::parse($trip->trip_date)->diffInDays(now()) }} days</span>
+        <h3 class="text-base font-bold">{{ $trip->title }}</h3>
+        <div class="flex items-center space-x-3 text-[11px] opacity-90 pt-1">
+          <span><i class="fa-regular fa-calendar text-[10px]"></i> {{ \Carbon\Carbon::parse($trip->trip_date)->format('n月j日 (土)') }}</span>
+          <span><i class="fa-solid fa-users text-[10px]"></i> {{ $trip->approvedParticipantsCount() }}/{{ $trip->max_participants }}名</span>
+          <span><i class="fa-solid fa-location-dot text-[10px]"></i> {{ $trip->location }}</span>
         </div>
-        <button class="relative bg-white p-2 rounded-full shadow-sm">
-            <i class="fa-regular fa-bell text-xl"></i>
-            <span class="absolute top-1 right-1 bg-orange-500 w-2 h-2 rounded-full"></span>
-        </button>
-    </header>
-
-    <main class="px-4 space-y-6">
-
-        <div class="bg-gradient-to-br from-teal-500 to-cyan-600 rounded-3xl p-5 text-white shadow-lg relative overflow-hidden">
-            <p class="text-sm opacity-90">セブ島・今日</p>
-            <div class="flex items-baseline space-x-2 my-1">
-                <span class="text-5xl font-black">32°</span>
-                <span class="text-xl opacity-70">/ 26°</span>
-            </div>
-            <p class="text-sm font-bold">晴れ</p>
-            <div class="flex space-x-4 mt-3 text-xs opacity-80">
-                <span><i class="fa-solid fa-droplet"></i> 湿度 78%</span>
-                <span><i class="fa-solid fa-wind"></i> 風 12km/h</span>
-            </div>
-            <div class="absolute right-6 top-6 text-6xl text-amber-400 animate-pulse">☀️</div>
+      </div>
+      <div class="flex items-center space-x-2">
+        <div class="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center">
+          <i class="fa-solid fa-anchor text-sm"></i>
         </div>
+        <i class="fa-solid fa-chevron-right text-xs opacity-70"></i>
+      </div>
+    </div>
+    @endforeach
+  </div>
+</div>
 
-        <div>
-            <h2 class="text-lg font-bold mb-2">Spot Map</h2>
-            <div class="bg-sky-200 h-32 rounded-3xl relative overflow-hidden flex items-center justify-center border border-white shadow-sm">
-                <p class="text-sky-700 font-bold z-10"><i class="fa-solid fa-location-dot"></i> タップしてマップを開く</p>
-                <div class="absolute inset-0 opacity-40 bg-cover" style="background-image: url('map-placeholder.png')"></div>
-            </div>
-        </div>
+<!-- My Posted Trips Widget -->
+<div class="space-y-3">
+  <div class="flex justify-between items-center px-1">
+    <h2 class="text-lg font-bold text-[#2C3E50]">My Posted Trips</h2>
+    <a href="#" class="text-xs text-[#008080] font-bold">New Post <i class="fa-solid fa-chevron-right text-[10px]"></i></a>
+  </div>
+  <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex justify-between items-center opacity-95">
+    <h3 class="text-sm font-bold text-gray-800">オスロブ ジンベエザメ体験</h3>
+    <span class="bg-[#FFF3CD] text-[#856404] text-[11px] font-bold px-2.5 py-0.5 rounded-full">Open</span>
+  </div>
+</div>
+@endsection
 
-        <div>
-            <div class="flex justify-between items-center mb-3">
-                <h2 class="text-lg font-bold">Upcoming Trips</h2>
-                <span class="bg-teal-100 text-teal-700 px-2 py-0.5 rounded-full text-xs font-bold">{{ $upcomingTrips->count() }}</span>
-            </div>
+@section('scripts')
+<script>
+  let map;
+  const locations = [
+    { title: "セブシティ", lat: 10.3157, lng: 123.8854 },
+    { title: "マクタン島", lat: 10.3168, lng: 123.9911 },
+    { title: "バンタヤン島", lat: 11.1620, lng: 123.7319 },
+    { title: "スミロン島", lat: 9.4310, lng: 123.3931 }
+  ];
 
-            <div class="space-y-3">
-                @foreach($upcomingTrips as $trip)
-                <div class="bg-gradient-to-r from-teal-600 to-teal-500 text-white p-4 rounded-2xl shadow-md flex justify-between items-center">
-                    <div class="space-y-1">
-                        <span class="text-xs opacity-70">In {{ \Carbon\Carbon::parse($trip->trip_date)->diffInDays(now()) }} days</span>
-                        <h3 class="font-bold text-lg">{{ $trip->title }}</h3>
-                        <div class="flex space-x-3 text-xs opacity-90 pt-1">
-                            <span><i class="fa-regular fa-calendar"></i> {{ $trip->trip_date }}</span>
-                            <span><i class="fa-solid fa-users"></i> {{ $trip->approvedParticipantsCount() }}/{{ $trip->max_participants }}名</span>
-                            <span><i class="fa-solid fa-location-dot"></i> {{ $trip->location }}</span>
-                        </div>
-                    </div>
-                    <i class="fa-solid fa-chevron-right opacity-70"></i>
-                </div>
-                @endforeach
-            </div>
-        </div>
+  function initMap() {
+    const centerLatLng = { lat: 10.3157, lng: 123.8854 }; 
+    map = new google.maps.Map(document.getElementById("map"), {
+      zoom: 10,
+      center: centerLatLng,
+      mapTypeControl: false,
+      streetViewControl: false,
+      fullscreenControl: false
+    });
 
-    </main>
+    locations.forEach(loc => {
+      const marker = new google.maps.Marker({
+        position: { lat: loc.lat, lng: loc.lng },
+        map: map,
+        title: loc.title,
+        animation: google.maps.Animation.DROP
+      });
+      const infoWindow = new google.maps.InfoWindow({
+        content: `<div style="color:#333; font-size:12px; font-weight:bold; padding:2px;">${loc.title}</div>`
+      });
+      marker.addListener("click", () => { infoWindow.open(map, marker); });
+    });
+  }
 
-    <nav class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100 shadow-xl px-4 py-2 flex justify-between items-center z-50">
-        <a href="{{ route('home') }}" class="flex flex-col items-center text-teal-600">
-            <i class="fa-solid fa-house text-xl"></i>
-            <span class="text-[10px] font-bold mt-1">Home</span>
-        </a>
-        <a href="{{ route('trips.search') }}" class="flex flex-col items-center text-gray-400 hover:text-teal-600">
-            <i class="fa-solid fa-magnifying-glass text-xl"></i>
-            <span class="text-[10px] font-bold mt-1">Search</span>
-        </a>
-        
-        <div class="relative -top-5">
-            <button onclick="togglePostModal()" class="bg-orange-500 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg shadow-orange-500/40 border-4 border-white focus:outline-none">
-                <i class="fa-solid fa-plus text-2xl"></i>
-            </button>
-            <span class="absolute -bottom-5 left-1/2 transform -translate-x-1/2 text-[10px] font-bold text-orange-500">Post</span>
-        </div>
-
-        <a href="#" class="flex flex-col items-center text-gray-400 hover:text-teal-600">
-            <i class="fa-solid fa-map text-xl"></i>
-            <span class="text-[10px] font-bold mt-1">Plan</span>
-        </a>
-        <a href="{{ route('profile.edit') }}" class="flex flex-col items-center text-gray-400 hover:text-teal-600">
-            <i class="fa-solid fa-user text-xl"></i>
-            <span class="text-[10px] font-bold mt-1">Profile</span>
-        </a>
-    </nav>
-
-    <div id="postModal" class="hidden fixed inset-0 bg-black/50 z-50 flex items-end justify-center">
-        </div>
-
-    <script>
-        function togglePostModal() {
-            // モーダルの開閉ロジック
-            alert("ここに募集作成フォームを表示します！");
-        }
-    </script>
-</body>
-</html>
+  function zoomToLocation(lat, lng, zoomLevel) {
+    if (map) {
+      map.panTo({ lat: lat, lng: lng });
+      map.setZoom(zoomLevel);
+    }
+  }
+</script>
+@endsection

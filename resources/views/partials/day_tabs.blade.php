@@ -1,10 +1,10 @@
 <div class="day-tabs">
     @foreach (range(1,$trip->day) as $day)
 
-    <button class="day-tab {{  }}">//
-        Day{{  }}//
+    <button class="day-tab {{ $day==1 ? 'active' : '' }}">//
+        Day{{ $day }}//
     </button>
-    
+
     @endforeach
 
     <button class="day-add">
