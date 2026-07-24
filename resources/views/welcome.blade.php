@@ -21,7 +21,7 @@
 <body class="flex justify-center items-center min-h-screen bg-gray-100 p-0 sm:p-4">
 
   <!-- JSを使わず、チェック同意後に次の画面へPOST/GETで遷移するためのformタグ -->
-  <form action="{{ route('login.view') }}" method="GET" class="w-full max-w-[412px] bg-[#FFFBF3] h-screen sm:h-[840px] shadow-2xl relative flex flex-col justify-between overflow-hidden sm:rounded-[40px] p-6 pt-12 pb-8">
+  <form action="{{ route('login') }}" method="GET" class="w-full max-w-[412px] bg-[#FFFBF3] h-screen sm:h-[840px] shadow-2xl relative flex flex-col justify-between overflow-hidden sm:rounded-[40px] p-6 pt-12 pb-8">
     
     <div class="flex justify-between items-center absolute top-3 left-6 right-6 text-xs font-semibold text-gray-800 z-20">
       <div>9:41</div>

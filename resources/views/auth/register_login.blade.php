@@ -184,7 +184,7 @@
       btnSubmit.textContent = "Create Account";
       footerText.innerHTML = 'Already have an account?<button type="button" onclick="switchTab(\'login\')" class="text-[#008080] font-bold hover:underline ml-1">Log In</button>';
       
-      authForm.action = "{{ route('register') }}";
+      authForm.action = "{{ route('register.submit') }}";
       
       // Make username & confirm password required for signup
       fieldUsername.querySelector('input').required = true;

@@ -15,7 +15,7 @@ class LoginController extends Controller
     {
         // もし views/auth.blade.php なら 'auth'
         // views/auth/login.blade.php などサブフォルダなら 'auth.login' に変更してください
-        return view('auth'); 
+        return view('auth.login');
     }
 
     /**
