@@ -78,10 +78,12 @@
           </a>
         </div>
       @endif
-    @endhasSection
+    @endif
 
   </div>
 
-  @yield('scripts')
+  @hasSection('scripts')
+    @yield('scripts')
+@endif
 </body>
 </html>
