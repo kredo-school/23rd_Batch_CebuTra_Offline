@@ -70,14 +70,66 @@ return [
         'delete_account'   => 'Delete Account(Unregister)'
     ],
 
+    // 'home' => [
+    //     'spot_map'          => 'Spot Map',
+    //     'cebu'              => 'Cebu',
+    //     'upcoming_trips'    => 'Upcoming Trips',
+    //     'posted_trips'       => 'Posted Trips',
+    //     'new_post'          => 'New Post',
+    //     'open'              => 'Open',
+
+    //     'map_title'       => 'Popular Spots in Cebu',
+    //     'map_subtitle'    => 'Explore top attractions on the map',
+    //     'view_detail'     => 'View Details',
+    //     'category_all'    => 'All',
+    //     'category_beach'  => 'Beaches',
+    //     'category_sight'  => 'Sights',
+    // ],
+
     'home' => [
-        'spot_map'          => 'Spot Map',
-        'cebu'              => 'Cebu',
-        'upcoming_trips'    => 'Upcoming Trips',
-        'posted_trips'       => 'Posted Trips',
-        'new_post'          => 'New Post',
-        'open'              => 'Open',
+        'cebu_today'      => 'Cebu · Today',
+        'humidity'         => 'Humidity',
+        'wind'             => 'Wind',
+        'wave'             => 'Wave',
+        'today'            => 'Today',
+        'spot_map'         => 'Spot Map',
+        // 'mactan'           => '🏖️ Mactan Island',
+        // 'cebu_city'        => '🏙️ Cebu City',
+        // 'bantayan'         => '🌴 Bantayan Island',
+        'upcoming_trips'   => 'Upcoming Trips',
+        'my_posted_trips'  => 'My Posted Trips',
+        'new_post'         => 'New Post',
+        'in_days'          => 'In :days days',
+        'members'          => ':current/:max members',
+        'status_open'      => 'Open',
+
+      'spots' => [
+        'mactan'       => '🏖️ Mactan',
+        'cebu_city'    => '🏙️ Cebu City',
+        'olango'       => '🦅 Olango Island',
+        'camotes'      => '🌴 Camotes Islands',
+        'siquijor'     => '🧙 Siquijor',
+        'tumalog'      => '💧 Tumalog Falls',
+        'cebu_safari'  => '🦁 Cebu Safari',
+        'bantayan'     => '🌴 Bantayan',
+        'bohol'        => '🐒 Bohol',
+        'oslob'        => '🐋 Oslob',
+        'sumilon'      => '🏝️ Sumilon',
+        'kawasan'      => '🌊 Kawasan Falls',
+        'moalboal'     => '🐢 Moalboal',
+        'boracay'      => '🌅 Boracay',
+        'palawan'      => '🛶 Palawan',
+        'siargao'      => '🏄 Siargao',
+      ],
     ],
+
+    'weather' => [
+        'clear'   => 'Sunny',
+        'cloudy'  => 'Cloudy',
+        'rain'    => 'Rainy',
+        'thunder' => 'Thunderstorm',
+    ],
+    
 
     'terms' => [
         'title' => 'Terms & Disclaimers',
@@ -154,4 +206,28 @@ return [
         'faq4_q' => 'Safety and community guidelines',
         'faq4_a' => 'We provide reporting and review systems to ensure a safe community. Please report any inappropriate content or behavior.',
     ],
+
+    'instagram' => [
+        'title'               => 'Instagram Settings',
+        'save'                => 'Save',
+        'safety_tip_title'    => 'Safety Tip',
+        'safety_tip_desc'     => 'To protect your privacy, we recommend creating and linking a secondary contact account rather than your main account.',
+        'section_account'     => 'Instagram Account',
+        'username'            => 'Username',
+        'section_visibility'  => 'Visibility Timing',
+        'vis_always_title'    => 'Always visible on profile',
+        'vis_always_desc'     => 'Other users can view your Instagram link on your profile at any time when searching.',
+        'vis_matched_title'   => 'Visible to confirmed trip members only',
+        'vis_matched_desc'    => 'Hidden during search and recruitment. Automatically revealed only to confirmed travel companions.',
+    ],
+
+    // 'weather' => [
+    //     'title'       => 'Cebu Weather Forecast',
+    //     'clear'       => 'Sunny',
+    //     'cloudy'      => 'Cloudy',
+    //     'rain'        => 'Rainy',
+    //     'thunder'     => 'Thunderstorm',
+    //     'max'         => 'High',
+    //     'min'         => 'Low',
+    // ],
 ];
