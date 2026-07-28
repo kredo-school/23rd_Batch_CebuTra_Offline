@@ -56,7 +56,7 @@ class AuthController extends Controller
         }
 
         return back()->withErrors([
-            'email' => 'メールアドレスまたはパスワードが正しくありません。',
+            'email' => 'The provided email or password is incorrect.',
         ])->onlyInput('email');
     }
 }

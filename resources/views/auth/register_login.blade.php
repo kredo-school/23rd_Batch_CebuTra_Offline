@@ -46,7 +46,7 @@
   @endif
 
   <!-- Authentication Form -->
-  <form id="auth-form" method="POST" action="{{ route('login') }}" class="space-y-4">
+  <form id="auth-form" method="POST" action="{{ route('login.submit') }}" class="space-y-4">
     @csrf
 
     <!-- Username / Name Field (Signup Only) -->
@@ -98,7 +98,7 @@
 
     <!-- Terms & Conditions (Signup Only) -->
     <div id="field-terms" class="hidden items-center ml-1 pt-1">
-      <input type="checkbox" id="terms" required class="w-4 h-4 text-[#008080] border-gray-300 rounded focus:ring-[#008080] cursor-pointer">
+      <input type="checkbox" id="terms" class="w-4 h-4 text-[#008080] border-gray-300 rounded focus:ring-[#008080] cursor-pointer">
       <label for="terms" class="ml-2 text-xs text-gray-500 font-medium select-none cursor-pointer">
         I agree to the <a href="{{ route('settings.terms') }}" class="text-[#008080] font-bold hover:underline">Terms</a> and <a href="{{ route('settings.terms') }}" class="text-[#008080] font-bold hover:underline">Privacy Policy</a>
       </label>
@@ -117,10 +117,10 @@
   </div>
 
   <div class="grid grid-cols-2 gap-3">
-    <button class="flex items-center justify-center gap-2 border border-gray-200 bg-white hover:bg-gray-50 py-2.5 rounded-xl text-xs font-bold text-gray-700 transition-all active:scale-[0.98] cursor-pointer">
+    <button type="button" class="flex items-center justify-center gap-2 border border-gray-200 bg-white hover:bg-gray-50 py-2.5 rounded-xl text-xs font-bold text-gray-700 transition-all active:scale-[0.98] cursor-pointer">
       <i class="fa-brands fa-google text-red-500 text-sm"></i> Google
     </button>
-    <button class="flex items-center justify-center gap-2 border border-gray-200 bg-white hover:bg-gray-50 py-2.5 rounded-xl text-xs font-bold text-gray-700 transition-all active:scale-[0.98] cursor-pointer">
+    <button type="button" class="flex items-center justify-center gap-2 border border-gray-200 bg-white hover:bg-gray-50 py-2.5 rounded-xl text-xs font-bold text-gray-700 transition-all active:scale-[0.98] cursor-pointer">
       <i class="fa-brands fa-apple text-black text-sm"></i> Apple
     </button>
   </div>
@@ -166,11 +166,12 @@
       btnSubmit.textContent = "Log In";
       footerText.innerHTML = 'Don\'t have an account?<button type="button" onclick="switchTab(\'signup\')" class="text-[#008080] font-bold hover:underline ml-1">Sign Up</button>';
       
-      authForm.action = "{{ route('login') }}";
+      authForm.action = "{{ route('login.submit') }}";
       
-      // Make username & confirm password non-required
+      // Make username, confirm password & terms non-required for login
       fieldUsername.querySelector('input').required = false;
       fieldConfirmPassword.querySelector('input').required = false;
+      document.getElementById('terms').required = false;
     } else {
       tabLogin.className = "flex-1 py-2 text-xs font-bold rounded-lg text-gray-500 hover:text-gray-700 transition-all";
       tabSignup.className = "flex-1 py-2 text-xs font-bold rounded-lg bg-white text-[#008080] shadow-sm transition-all";
@@ -186,9 +187,10 @@
       
       authForm.action = "{{ route('register.submit') }}";
       
-      // Make username & confirm password required for signup
+      // Make username, confirm password & terms required for signup
       fieldUsername.querySelector('input').required = true;
       fieldConfirmPassword.querySelector('input').required = true;
+      document.getElementById('terms').required = true;
     }
   }
 
