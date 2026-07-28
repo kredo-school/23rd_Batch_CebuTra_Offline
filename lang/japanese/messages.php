@@ -71,13 +71,64 @@ return [
 
     ],
 
+    // 'home' => [
+    //     'spot_map'          => 'おすすめスポット',
+    //     'cebu'              => 'セブ',
+    //     'upcoming_trips'    => '直近の旅行予定',
+    //     'posted_trips'       => '募集中の旅行',
+    //     'new_post'          => '新しい募集',
+    //     'open'              => '開く',
+
+    //     'map_title'       => 'セブ島の人気スポット',
+    //     'map_subtitle'    => 'マップから気になる場所を探してみよう',
+    //     'view_detail'     => '詳細を見る',
+    //     'category_all'    => 'すべて',
+    //     'category_beach'  => 'ビーチ',
+    //     'category_sight'  => '観光地',
+    // ],
+
     'home' => [
-        'spot_map'          => 'おすすめスポット',
-        'cebu'              => 'セブ',
-        'upcoming_trips'    => '直近の旅行予定',
-        'posted_trips'       => '募集中の旅行',
-        'new_post'          => '新しい募集',
-        'open'              => '開く',
+        'cebu_today'      => 'セブ島 · 今日',
+        'humidity'         => '湿度',
+        'wind'             => '風',
+        'wave'             => '波高',
+        'today'            => '今日',
+        'spot_map'         => 'スポットマップ',
+        // 'mactan'           => '🏖️ マクタン島',
+        // 'cebu_city'        => '🏙️ セブシティ',
+        // 'bantayan'         => '🌴 バンタヤン島',
+        'upcoming_trips'   => '参加予定の旅',
+        'my_posted_trips'  => '募集中の旅',
+        'new_post'         => '新規投稿',
+        'in_days'          => ':days日後',
+        'members'          => ':current/:max名',
+        'status_open'      => '募集中',
+
+     'spots' => [
+        'mactan'       => '🏖️ マクタン島',
+        'cebu_city'    => '🏙️ セブシティ',
+        'olango'       => '🦅 オランゴ島',
+        'camotes'      => '🌴 カモテス島',
+        'siquijor'     => '🧙 シキホール島',
+        'tumalog'      => '💧 ツマログ滝',
+        'cebu_safari'  => '🦁 セブサファリ',
+        'bantayan'     => '🌴 バンタヤン島',
+        'bohol'        => '🐒 ボホール島',
+        'oslob'        => '🐋 オスロブ',
+        'sumilon'      => '🏝️ スミロン島',
+        'kawasan'      => '🌊 カワサン滝',
+        'moalboal'     => '🐢 モアルボアル',
+        'boracay'      => '🌅 ボラカイ島',
+        'palawan'      => '🛶 パラワン島',
+        'siargao'      => '🏄 シャルガオ島',
+      ],
+    ],
+
+    'weather' => [
+        'clear'   => '晴れ',
+        'cloudy'  => '曇り',
+        'rain'    => '雨',
+        'thunder' => '雷雨',
     ],
 
     'terms' => [
@@ -155,5 +206,29 @@ return [
         'faq4_q' => '安全・安心への取り組みについて',
         'faq4_a' => 'ユーザー間のトラブル防止のため、通報機能やレビュー機能を設けています。不適切な投稿を見つけた場合は通報をお願いいたします。',
     ],
+
+    'instagram' => [
+        'title'               => 'Instagram設定',
+        'save'                => '保存',
+        'safety_tip_title'    => '安全のためのヒント',
+        'safety_tip_desc'     => 'プライバシーを守るため、普段お使いのメインアカウントではなく「連絡用のサブアカウント」を作成して登録することを推奨しています。',
+        'section_account'     => 'Instagramアカウント',
+        'username'            => 'ユーザー名',
+        'section_visibility'  => '公開タイミングの設定',
+        'vis_always_title'    => 'プロフィール上で常に公開する',
+        'vis_always_desc'     => '他のユーザーがあなたを検索した際、いつでもプロフィールからInstagramを確認できます。',
+        'vis_matched_title'   => '旅行メンバー確定時のみ公開する',
+        'vis_matched_desc'    => '募集・検索段階では非公開です。一緒に行くメンバーとしてお互いに確定した相手にのみ自動公開されます。',
+    ],
+
+    // 'weather' => [
+    //     'title'       => 'セブ島の天気予報',
+    //     'clear'       => '晴れ',
+    //     'cloudy'      => '曇り',
+    //     'rain'        => '雨',
+    //     'thunder'     => '雷雨',
+    //     'max'         => '最高',
+    //     'min'         => '最低',
+    // ],
 
 ];
