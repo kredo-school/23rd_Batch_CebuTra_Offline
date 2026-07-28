@@ -84,6 +84,22 @@ class ProfileController extends Controller
         return redirect()->route('profile.show')->with('status', 'Profile updated successfully!');
     }
 
+    public function destroy(Request $request)
+    {
+        $user = Auth::user();
+        if ($user) {
+            $user->delete();
+        }
+
+        // ログアウトとセッション破棄
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        // 💡 ログアウト後に auth ルート（auth.blade.php）へ飛ばす
+        return redirect()->route('auth')->with('status', 'Your account has been deleted.');
+    }
+
     /**
      * Display settings page.
      */
@@ -110,9 +126,40 @@ class ProfileController extends Controller
         return view('auth.Setting.instagram-setting');
     }
 
+    public function updateInstagram(Request $request)
+    {
+        $request->validate([
+            'instagram_username' => 'nullable|string|max:255',
+            'visibility_timing'  => 'required|in:always,matched',
+        ]);
+
+        $user = auth()->user();
+        $user->instagram_username = $request->instagram_username;
+        $user->instagram_visibility = $request->visibility_timing;
+        $user->save();
+
+        return redirect()->route('profile')->with('success', 'Instagram settings updated!');
+    }
+
     public function language()
     {
         return view('auth.Setting.language');
+    }
+
+    public function updateLanguage(Request $request)
+    {
+        $request->validate([
+            'locale' => 'required|in:english,japanese,chinese',
+        ]);
+
+        // セッションに選択した言語を保存
+        session(['locale' => $request->locale]);
+        
+        // 選択された言語をアプリケーションに即座に反映
+        App::setLocale($request->locale);
+
+        // 設定一覧画面へ戻る（メッセージ等を付与してもOK）
+        return redirect()->route('all-settings');
     }
 
     public function terms()

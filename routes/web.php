@@ -65,6 +65,8 @@ Route::middleware(['auth'])->group(function () {
 // ---------------------------------------------------------------------------
 Route::middleware(['auth'])->group(function () {
     Route::get('/profile/settings', [ProfileController::class, 'settings'])->name('all-settings');
+    Route::get('/profile/settings/instagram', [ProfileController::class, 'Instagram'])->name('setting.instagram');
+    Route::post('/profile/settings/Instagram', [ProfileController::class, 'updateinstagram'])->name('setting.instagram.update');
     Route::get('/profile/settings/emergency', [ProfileController::class, 'emergency'])->name('setting.emergency');
     Route::get('/profile/settings/help', [ProfileController::class, 'helpCenter'])->name('setting.help');
     Route::get('/profile/settings/terms', [ProfileController::class, 'terms'])->name('setting.terms');
