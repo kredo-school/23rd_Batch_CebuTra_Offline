@@ -38,6 +38,7 @@ Route::get('/password/request', function () {
 // ---------------------------------------------------------------------------
 Route::middleware(['auth'])->group(function () {
     // Home / Trip related routes
+    // Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::get('/home', [TripController::class, 'index'])->name('home');
     Route::get('/search', [TripController::class, 'search'])->name('trips.search');
     Route::post('/post', [TripController::class, 'store'])->name('trips.store');
