@@ -85,5 +85,5 @@
 
     </div>
 
-    <x-bottom-nav active="explore" />
+    <x-bottom_nav active="explore" />
 @endsection

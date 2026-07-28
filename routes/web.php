@@ -143,11 +143,11 @@ Route::post('/events/create/step4',[EventCreateController::class,'storestep4'])-
 #イベント詳細ページ
 Route::get('/events/{id}',[EventController::class,'show'])->name('events.show');
 #旅程作成ページ
-// Route::middleware('auth')->group(function(){
-//     //旅程
-//     Route::resource('itineraries',ItineraryController::class);
-//     //アクティビティ
-//     Route::post('/itineraries/{trip}/items',[ItineraryItemController::class,'store'])->name('items.store');
-//     Route::put('/items/{item}',[ItineraryItemController::class,'update'])->name('items.update');
-//     Route::delete('/items/{item}',[ItineraryItemController::class,'destroy'])->name('items.destroy');
-// });
+Route::middleware('auth')->group(function(){
+    //旅程
+    Route::resource('itineraries',ItineraryController::class);
+    //アクティビティ
+    Route::post('/itineraries/{trip}/items',[ItineraryItemController::class,'store'])->name('items.store');
+    Route::put('/items/{item}',[ItineraryItemController::class,'update'])->name('items.update');
+    Route::delete('/items/{item}',[ItineraryItemController::class,'destroy'])->name('items.destroy');
+});
