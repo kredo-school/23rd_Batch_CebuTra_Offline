@@ -11,17 +11,17 @@
 @endsection
 
 @section('form')
-<form method="POST">
+<form method="POST" action="{{ route('events.create.step3') }}">
 @csrf
 <label for="attach">
 
-    <input type="radio" name="plan_id" value="checked">
+    <input type="radio" name="trip_id" value="checked">
     旅程を添付しない
 </label>
 
 @foreach ($itineraries as $itinerary)
 <label for="itinerary">
-<input type="radio" name="itinerary_id" value="{{ $itinerary->id }}"> //
+<input type="radio" name="trip_id" value="{{ $itinerary->id }}"> //
 
 {{ $itinerary->title }} //
 </label>

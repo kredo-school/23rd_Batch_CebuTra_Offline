@@ -12,7 +12,7 @@
 @endsection
 
 @section('form')
-<form method="POST"> //
+<form method="POST" action="{{ route('events.create.step2') }}"> //
 @csrf
 
 <h3>募集人数</h3>
