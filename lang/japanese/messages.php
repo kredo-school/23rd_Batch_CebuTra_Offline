@@ -22,14 +22,6 @@ return [
         'con_link'       => '公開するアカウント',
         'trip_history'   => '最近の旅行履歴',
         'setting_privacy'=> '設定とプライバシー',
-
-        // 'my_plans'       => '作成したプラン',
-        // 'saved_spots'    => '保存したスポット',
-        // 'reviews'        => '投稿したレビュー',
-        // 'settings'       => '設定',
-        // 'help_center'    => 'ヘルプセンター',
-        // 'terms'          => '利用規約＆免責事項',
-        // 'logout'         => 'ログアウト',
     ],
 
     'edit_profile' => [
@@ -48,7 +40,7 @@ return [
         'age'               => '年齢',
         'gender'            => '性別',
         'nationality'       => '国籍',
-        'naitive_lang'      => '母国語',
+        'native_lang'      => '母国語',
         'email_address'     => 'メールアドレス',
         'save_changes'      => '変更を保存',
 
@@ -71,21 +63,6 @@ return [
 
     ],
 
-    // 'home' => [
-    //     'spot_map'          => 'おすすめスポット',
-    //     'cebu'              => 'セブ',
-    //     'upcoming_trips'    => '直近の旅行予定',
-    //     'posted_trips'       => '募集中の旅行',
-    //     'new_post'          => '新しい募集',
-    //     'open'              => '開く',
-
-    //     'map_title'       => 'セブ島の人気スポット',
-    //     'map_subtitle'    => 'マップから気になる場所を探してみよう',
-    //     'view_detail'     => '詳細を見る',
-    //     'category_all'    => 'すべて',
-    //     'category_beach'  => 'ビーチ',
-    //     'category_sight'  => '観光地',
-    // ],
 
     'home' => [
         'cebu_today'      => 'セブ島 · 今日',
@@ -94,9 +71,6 @@ return [
         'wave'             => '波高',
         'today'            => '今日',
         'spot_map'         => 'スポットマップ',
-        // 'mactan'           => '🏖️ マクタン島',
-        // 'cebu_city'        => '🏙️ セブシティ',
-        // 'bantayan'         => '🌴 バンタヤン島',
         'upcoming_trips'   => '参加予定の旅',
         'my_posted_trips'  => '募集中の旅',
         'new_post'         => '新規投稿',
@@ -219,16 +193,7 @@ return [
         'vis_always_desc'     => '他のユーザーがあなたを検索した際、いつでもプロフィールからInstagramを確認できます。',
         'vis_matched_title'   => '旅行メンバー確定時のみ公開する',
         'vis_matched_desc'    => '募集・検索段階では非公開です。一緒に行くメンバーとしてお互いに確定した相手にのみ自動公開されます。',
+        'public_accounts'     => '公開するアカウント',
+        'no_instagram'        => 'Instagramアカウントは未連携です',
     ],
-
-    // 'weather' => [
-    //     'title'       => 'セブ島の天気予報',
-    //     'clear'       => '晴れ',
-    //     'cloudy'      => '曇り',
-    //     'rain'        => '雨',
-    //     'thunder'     => '雷雨',
-    //     'max'         => '最高',
-    //     'min'         => '最低',
-    // ],
-
 ];

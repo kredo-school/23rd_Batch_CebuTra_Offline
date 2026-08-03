@@ -47,13 +47,43 @@
       <!-- プロフィール基本情報 ＆ 編集ボタン -->
       <div class="bg-white rounded-3xl p-5 shadow-sm border border-gray-100/50 flex flex-col items-center text-center space-y-4">
         <div class="relative">
-          <div class="w-20 h-20 bg-[#2E9AA4] rounded-3xl flex items-center justify-center border-4 border-[#FFFBF3] shadow-md text-4xl">🌺</div>
-          <div class="absolute -bottom-1 -right-1 bg-amber-500 text-white w-5 h-5 rounded-lg flex items-center justify-center border border-white text-[9px]"><i class="fa-solid fa-clock"></i></div>
+          {{-- <div class="w-20 h-20 bg-[#2E9AA4] rounded-3xl flex items-center justify-center border-4 border-[#FFFBF3] shadow-md text-4xl">🌺</div>
+          <div class="absolute -bottom-1 -right-1 bg-amber-500 text-white w-5 h-5 rounded-lg flex items-center justify-center border border-white text-[9px]"><i class="fa-solid fa-clock"></i></div> --}}
+          <div class="w-20 h-20 bg-[#2E9AA4] rounded-3xl flex items-center justify-center border-4 border-[#FFFBF3] shadow-md text-4xl overflow-hidden">
+            @if(isset($user->avatar_url) && $user->avatar_url)
+            <img src="{{ asset('storage/' . $user->avatar_url) }}" alt="{{ $user->name }}" class="w-full h-full object-cover">
+            @else
+            🌺
+            @endif
+          </div>
+          <div class="absolute -bottom-1 -right-1 bg-amber-500 text-white w-5 h-5 rounded-lg flex items-center justify-center border border-white text-[9px]">
+            <i class="fa-solid fa-clock"></i>
+          </div>
         </div>
+
+          
+
         <div class="space-y-1">
-          <h2 class="text-lg font-bold text-gray-800">{{ $user->name ?? 'Guest' }}</h2>
-          <p class="text-xs text-gray-400 font-bold tracking-wide uppercase">22, Female • Japan</p>
-        </div>
+        <h2 class="text-lg font-bold text-gray-800">{{ $user->name ?? 'Guest' }}</h2>
+  
+        <p class="text-xs text-gray-400 font-bold tracking-wide uppercase">
+         @php
+         $details = array_filter([
+            $user->age ? $user->age : null,
+            $user->gender,
+            $user->nationality,
+         ]);
+         @endphp
+
+        @if(!empty($details))
+          {{ implode(' • ', $details) }}
+        @else
+         No profile info
+        @endif
+       </p>
+     </div>
+
+
         <!-- 💡 aタグの遷移先をLaravelルートに変更 -->
         <a href="{{ route('profile.edit') }}" class="w-full bg-[#008080]/5 hover:bg-[#008080]/10 text-[#008080] font-bold py-2.5 px-4 rounded-xl text-xs transition-all flex items-center justify-center gap-1.5 border border-[#008080]/10">
           <i class="fa-regular fa-pen-to-square"></i>{{ __('messages.profile.edit_profile') }}
@@ -68,37 +98,118 @@
       <div class="space-y-2">
         <h3 class="text-[11px] font-bold text-slate-400 tracking-wider uppercase px-1">{{ __('messages.profile.study_info') }}</h3>
         <div class="bg-white rounded-[24px] p-5 shadow-sm border border-gray-100/50 space-y-4 text-xs">
-          <div class="flex justify-between items-center">
-            <span class="text-slate-400 font-semibold">{{__('messages.edit_profile.school')}}</span>
-            <span class="text-slate-800 font-bold">EV Academy</span>
-          </div>
-          <div class="flex justify-between items-center">
-            <span class="text-slate-400 font-semibold">{{__('messages.edit_profile.english_level')}}</span>
-            <span class="text-[#008080] bg-teal-50/60 px-2.5 py-1 rounded-lg font-bold text-[11px]">Intermediate (B1)</span>
-          </div>
-          <div class="flex justify-between items-center">
-            <span class="text-slate-400 font-semibold">{{__('messages.edit_profile.current_area')}}</span>
-            <span class="text-slate-800 font-bold">Around IT Park</span>
-          </div>
+    
+      <!-- 学校名 -->
+        <div class="flex justify-between items-center">
+         <span class="text-slate-400 font-semibold">{{ __('messages.edit_profile.school') }}</span>
+         <span class="text-slate-800 font-bold">{{ $user->school ?? '-' }}</span>
+        </div>
+
+      <!-- 英語レベル -->
+        <div class="flex justify-between items-center">
+         <span class="text-slate-400 font-semibold">{{ __('messages.edit_profile.english_level') }}</span>
+         <span class="text-[#008080] bg-teal-50/60 px-2.5 py-1 rounded-lg font-bold text-[11px]">
+           @if($user->english_level)
+             @switch($user->english_level)
+             @case('Beginner')
+               Beginner (A1-A2)
+              @break
+             @case('Intermediate')
+               Intermediate (B1)
+              @break
+             @case('Upper-Intermediate')
+               Upper-Intermediate (B2)
+              @break
+             @case('Advanced')
+               Advanced (C1-C2)
+              @break
+             @default
+               {{ $user->english_level }}
+             @endswitch
+           @else
+             -
+           @endif
+        </span>
+      </div>
+
+      <!-- 現在の滞在エリア -->
+        <div class="flex justify-between items-center">
+          <span class="text-slate-400 font-semibold">{{ __('messages.edit_profile.current_area') }}</span>
+          <span class="text-slate-800 font-bold">
+        @if($user->current_area)
+          @switch($user->current_area)
+            @case('IT Park')
+              Around IT Park
+              @break
+            @case('Cebu City Center')
+              Cebu City Center
+              @break
+            @case('Mactan')
+              Mactan Island
+              @break
+            @case('Mandaue')
+              Mandaue City
+              @break
+            @default
+              {{ $user->current_area }}
+          @endswitch
+        @else
+          -
+        @endif
+        </span>
+      </div>
+
+      </div>
+     </div>
+     
+      <!-- Connected Links 公開するアカウント エリア -->
+
+<div class="space-y-2">
+  <h4 class="text-xs font-bold text-gray-500 px-1">
+    {{ __('messages.instagram.public_accounts') ?? '公開するアカウント' }}
+  </h4>
+
+  {{-- Instagram ユーザー名が登録されている場合のみカードを表示 --}}
+  @if(!empty(auth()->user()->instagram_username))
+    <a 
+      href="https://www.instagram.com/{{ auth()->user()->instagram_username }}/" 
+      target="_blank" 
+      rel="noopener noreferrer" 
+      class="flex items-center justify-between p-4 bg-white rounded-2xl shadow-sm border border-gray-100/80 hover:shadow-md transition-all active:scale-[0.99] group"
+    >
+      <div class="flex items-center space-x-3.5">
+        <!-- Instagram アイコン（グラデーション背景） -->
+        <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] flex items-center justify-center text-white text-xl shadow-sm group-hover:scale-105 transition-transform">
+          <i class="fa-brands fa-instagram"></i>
+        </div>
+        
+        <!-- テキスト情報 -->
+        <div class="flex flex-col">
+          <span class="text-[10px] font-extrabold tracking-wider text-gray-400 uppercase">
+            INSTAGRAM
+          </span>
+          <span class="text-sm font-bold text-slate-800 group-hover:text-pink-600 transition-colors">
+            {{ '@' . auth()->user()->instagram_username }}
+          </span>
         </div>
       </div>
 
-      <!-- Connected Links -->
-      <div class="space-y-2">
-        <h3 class="text-[11px] font-bold text-slate-400 tracking-wider uppercase px-1">{{ __('messages.profile.con_link') }}</h3>
-        <a href="https://instagram.com" target="_blank" class="bg-white hover:bg-gray-50/50 border border-gray-100/50 rounded-2xl p-4 flex items-center justify-between shadow-sm transition-all">
-          <div class="flex items-center gap-3">
-            <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-yellow-500 via-pink-500 to-purple-600 text-white flex items-center justify-center text-sm flex-shrink-0">
-              <i class="fa-brands fa-instagram"></i>
-            </div>
-            <div class="flex flex-col">
-              <span class="text-[9px] text-gray-400 font-bold uppercase tracking-wider">Instagram</span>
-              <span class="text-xs font-bold text-gray-700">@sakura_cebu</span>
-            </div>
-          </div>
-          <i class="fa-solid fa-arrow-up-right-from-square text-[10px] text-gray-300"></i>
-        </a>
+      <!-- 外部リンクアイコン -->
+      <div class="text-gray-300 group-hover:text-gray-500 transition-colors">
+        <i class="fa-solid fa-arrow-up-right-from-square text-sm"></i>
       </div>
+    </a>
+  @else
+    {{-- 未登録時のプレースホルダー（必要に応じて表示） --}}
+    <div class="p-4 bg-gray-50/50 rounded-2xl border border-dashed border-gray-200 text-center">
+      <p class="text-xs text-gray-400 font-medium">
+        {{ __('messages.instagram.no_instagram') ?? 'Instagramアカウントは未連携です' }}
+      </p>
+    </div>
+  @endif
+</div>
+
+
 
       <!-- Trip History セクション -->
       <div class="space-y-2">
