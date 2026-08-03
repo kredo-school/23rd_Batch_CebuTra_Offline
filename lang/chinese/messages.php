@@ -22,14 +22,6 @@ return [
         'con_link'       => '公共账户',
         'trip_history'   => '近期旅行史',
         'setting_privacy'=> '设置和隐私',
-
-        // 'my_plans'       => '我的行程',
-        // 'saved_spots'    => '收藏地点',
-        // 'reviews'        => '我的评价',
-        // 'settings'       => '设置',
-        // 'help_center'    => '帮助中心',
-        // 'terms'          => '服务条款与免责声明',
-        // 'logout'         => '退出登录',
     ],
 
     'edit_profile' => [
@@ -48,9 +40,9 @@ return [
         'age'               => '年龄',
         'gender'            => '性别',
         'nationality'       => '国籍',
-        'naitive_lang'      => '母语',
+        'native_lang'      => '母语',
         'email_address'     => '电子邮件',
-        'save_change'       => '保存更改',
+        'save_changes'       => '保存更改',
 
     ],
 
@@ -70,21 +62,6 @@ return [
         'delete_account'   => '账户删除',
     ],
 
-    // 'home' => [
-    //     'spot_map'          => '推荐地点',
-    //     'cebu'              => '宿务',
-    //     'upcoming_trips'    => '计划行程',
-    //     'posted_trips'       => '我发布的旅行记录',
-    //     'new_post'          => '新招聘',
-    //     'open'              => '打开',
-
-    //     'map_title'       => '宿雾热门景点',
-    //     'map_subtitle'    => '在地图上探索热门去处',
-    //     'view_detail'     => '查看详情',
-    //     'category_all'    => '全部',
-    //     'category_beach'  => '海滩',
-    //     'category_sight'  => '景点',
-    // ],
 
     'home' => [
         'cebu_today'      => '宿雾 · 今天',
@@ -93,9 +70,6 @@ return [
         'wave'             => '浪高',
         'today'            => '今天',
         'spot_map'         => '景点地图',
-        // 'mactan'           => '🏖️ 麦克坦岛',
-        // 'cebu_city'        => '🏙️ 宿雾市',
-        // 'bantayan'         => '🌴 班塔延岛',
         'upcoming_trips'   => '即将行成的行程',
         'my_posted_trips'  => '我发起的招募',
         'new_post'         => '发布新行程',
@@ -218,15 +192,8 @@ return [
         'vis_always_desc'     => '其他用户在搜索或浏览您的主页时，可随时查看您的 Instagram。',
         'vis_matched_title'   => '仅对确认同行的旅友公开',
         'vis_matched_desc'    => '在招募和搜索阶段保持隐藏。仅在互相确认成为同行旅友后自动公开。',
+        'public_accounts'     => '公开账号',
+        'no_instagram'        => '未关联 Instagram 账号',
     ],
 
-    // 'weather' => [
-    //     'title'       => '宿雾天气预报',
-    //     'clear'       => '晴朗',
-    //     'cloudy'      => '多云',
-    //     'rain'        => '有雨',
-    //     'thunder'     => '雷阵雨',
-    //     'max'         => '最高',
-    //     'min'         => '最低',
-    // ],
 ];

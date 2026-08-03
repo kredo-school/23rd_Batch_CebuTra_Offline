@@ -22,14 +22,6 @@ return [
         'con_link'       => 'CONNECTED LINK',
         'trip_history'   => 'TRIP HISTORY',
         'setting_privacy'=> 'Settings & Privacy',
-        
-        // 'my_plans'       => 'My Plans',
-        // 'saved_spots'    => 'Saved Spots',
-        // 'reviews'        => 'Reviews',
-        // 'settings'       => 'Settings',
-        // 'help_center'    => 'Help Center',
-        // 'terms'          => 'Terms & Disclaimers',
-        // 'logout'         => 'Log Out',
     ],
 
     'edit_profile' => [
@@ -48,9 +40,9 @@ return [
         'age'               => 'Age',
         'gender'            => 'Gender',
         'nationality'       => 'Nationality',
-        'naitive_lang'      => 'Native Lang',
+        'native_lang'      => 'Native Lang',
         'email_address'     => 'Email Address',
-        'save_change'       => 'Save Change',
+        'save_changes'       => 'Save Change',
 
     ],
 
@@ -70,21 +62,6 @@ return [
         'delete_account'   => 'Delete Account(Unregister)'
     ],
 
-    // 'home' => [
-    //     'spot_map'          => 'Spot Map',
-    //     'cebu'              => 'Cebu',
-    //     'upcoming_trips'    => 'Upcoming Trips',
-    //     'posted_trips'       => 'Posted Trips',
-    //     'new_post'          => 'New Post',
-    //     'open'              => 'Open',
-
-    //     'map_title'       => 'Popular Spots in Cebu',
-    //     'map_subtitle'    => 'Explore top attractions on the map',
-    //     'view_detail'     => 'View Details',
-    //     'category_all'    => 'All',
-    //     'category_beach'  => 'Beaches',
-    //     'category_sight'  => 'Sights',
-    // ],
 
     'home' => [
         'cebu_today'      => 'Cebu · Today',
@@ -93,9 +70,6 @@ return [
         'wave'             => 'Wave',
         'today'            => 'Today',
         'spot_map'         => 'Spot Map',
-        // 'mactan'           => '🏖️ Mactan Island',
-        // 'cebu_city'        => '🏙️ Cebu City',
-        // 'bantayan'         => '🌴 Bantayan Island',
         'upcoming_trips'   => 'Upcoming Trips',
         'my_posted_trips'  => 'My Posted Trips',
         'new_post'         => 'New Post',
@@ -219,15 +193,7 @@ return [
         'vis_always_desc'     => 'Other users can view your Instagram link on your profile at any time when searching.',
         'vis_matched_title'   => 'Visible to confirmed trip members only',
         'vis_matched_desc'    => 'Hidden during search and recruitment. Automatically revealed only to confirmed travel companions.',
+        'public_accounts'     => 'Public Accounts',
+        'no_instagram'        => 'No Instagram account connected',
     ],
-
-    // 'weather' => [
-    //     'title'       => 'Cebu Weather Forecast',
-    //     'clear'       => 'Sunny',
-    //     'cloudy'      => 'Cloudy',
-    //     'rain'        => 'Rainy',
-    //     'thunder'     => 'Thunderstorm',
-    //     'max'         => 'High',
-    //     'min'         => 'Low',
-    // ],
 ];
