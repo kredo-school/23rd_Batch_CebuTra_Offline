@@ -48,13 +48,6 @@
       </div>
     </div>
 
-    
-    <!-- デバッグ用：画面の上部に貼り付けて確認 -->
-    {{-- <div class="bg-yellow-200 p-2 text-xs text-black font-mono">
-    現在のLocale: {{ app()->getLocale() }} <br>
-    セッションのLocale: {{ session('locale', 'なし') }}
-    </div> --}}
-
 
     <!-- メイン領域 -->
     <div class="flex-1 overflow-y-auto no-scrollbar p-5 space-y-5 pb-28">
@@ -102,17 +95,7 @@
 
     <!-- ボトムナビ -->
     @include('components.bottom-nav')
-    {{-- <div class="absolute bottom-0 left-0 right-0 bg-white border-t border-gray-100 px-4 py-2 flex justify-between items-center sm:rounded-b-[40px] shadow-[0_-4px_12px_rgba(0,0,0,0.04)] z-30 flex-shrink-0">
-      <a href="{{ route('home') }}" class="flex flex-col items-center justify-center w-14 py-1 text-gray-400 hover:text-gray-600"><i class="fa-solid fa-house text-lg"></i><span class="text-[10px] font-medium mt-0.5">Home</span></a>
-      <a href="#" class="flex flex-col items-center justify-center w-14 py-1 text-gray-400 hover:text-gray-600"><i class="fa-solid fa-magnifying-glass text-lg"></i><span class="text-[10px] font-medium mt-0.5">Explore</span></a>
-      <div class="relative -top-5 flex flex-col items-center">
-        <a href="#" class="w-14 h-14 bg-[#FF6347] rounded-full flex items-center justify-center text-white border-4 border-white shadow-lg shadow-orange-500/30"><i class="fa-solid fa-plus text-xl"></i></a>
-        <span class="text-[10px] text-[#FF6347] font-bold mt-1">Recruit</span>
-      </div>
-      <a href="#" class="flex flex-col items-center justify-center w-14 py-1 text-gray-400 hover:text-gray-600"><i class="fa-solid fa-map text-lg"></i><span class="text-[10px] font-medium mt-0.5">Itinerary</span></a>
-      <a href="{{ route('profile') }}" class="flex flex-col items-center justify-center w-14 py-1 text-[#008080]"><i class="fa-solid fa-user text-lg"></i><span class="text-[10px] font-bold mt-0.5">Profile</span></a>
-    </div> --}}
-
+    
   </form>
 
 </body>
