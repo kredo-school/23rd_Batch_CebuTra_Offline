@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
@@ -74,14 +78,59 @@ class ProfileController extends Controller
      */
     public function update(Request $request)
     {
-        // Perform simple validation and update if logged in
-        $user = Auth::user();
-        if ($user) {
-            $user->update($request->only('name', 'email'));
-            // Save other profile attributes if schema exists
+        $validated = $request->validate([
+            'name'                 => 'required|string|max:50',
+            'bio'                  => 'nullable|string|max:500',
+            'school'               => 'nullable|string|max:100',
+            'english_level'        => 'nullable|string',
+            'current_area'         => 'nullable|string',
+            'age'                  => 'nullable|integer|min:0|max:120',
+            'gender'               => 'nullable|string',
+            'nationality'          => 'nullable|string|max:50',
+            'native_lang'          => 'nullable|string|max:50',
+            'email'                => [
+                'required', 'string', 'email', 'max:255',
+                Rule::unique('users', 'email')->ignore($user->id),
+            ],
+            'instagram_username'   => 'nullable|string|max:100|regex:/^[a-zA-Z0-9._]+$/',
+            // 💡 unllable のスペルミスを nullable に修正
+            'instagram_visibility' => 'nullable|in:always,matched_only,private,matched',
+            'avatar'               => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048', // 画像アップロード対応
+        ], [
+            'instagram_username.regex' => __('messages.profile.invalid_username'),
+        ]);
+
+        // 2. Instagram ユーザー名の整形（@マークの削除）
+        if (!empty($validated['instagram_username'])) {
+            $validated['instagram_username'] = ltrim(trim($validated['instagram_username']), '@');
         }
+
+        // 3. アバター画像のアップロード処理
+        if ($request->hasFile('avatar')) {
+            // 古い画像が存在すれば削除
+            if ($user->avatar_url) {
+                Storage::disk('public')->delete($user->avatar_url);
+            }
+            // storage/app/public/avatars に保存
+            $path = $request->file('avatar')->store('avatars', 'public');
+            $validated['avatar_url'] = $path;
+        }
+
+        // 4. DBを一括更新
+        $user->update($validated);
+
+        // 5. 保存完了後、プロフィール画面（一覧）へリダイレクト
+        return redirect()->route('profile')->with('success', __('messages.profile.updated_success') ?? 'Profile updated successfully!');
+
         
-        return redirect()->route('profile.show')->with('status', 'Profile updated successfully!');
+        // Perform simple validation and update if logged in
+        // $user = Auth::user();
+        // if ($user) {
+        //     $user->update($request->only('name', 'email'));
+        //     // Save other profile attributes if schema exists
+        // }
+        
+        // return redirect()->route('profile.show')->with('status', 'Profile updated successfully!');
     }
 
     public function destroy(Request $request)
@@ -141,7 +190,7 @@ class ProfileController extends Controller
         return redirect()->route('profile')->with('success', 'Instagram settings updated!');
     }
 
-    public function language()
+    public function editLanguage()
     {
         return view('auth.Setting.language');
     }
