@@ -111,22 +111,132 @@
       <!-- アクションボタン領域（JSなし仕様） -->
       <div class="space-y-4 pt-2">
         
-        <!-- 💡 JS不要：Laravelの標準的なログアウト処理（POST送信） -->
-        <form action="{{ route('logout') }}" method="POST" class="m-0">
-          @csrf
-          <button type="submit" class="w-full bg-white border border-gray-100 text-red-500 text-xs font-bold py-3.5 px-4 rounded-[20px] shadow-sm hover:bg-red-50/30 active:scale-[0.99] transition-all cursor-pointer">
-            {{__('messages.settings.logout')}}
-          </button>
-        </form>
+        <div class="space-y-3">
+          <!-- ログアウトボタン -->
+          <form id="logout-form" action="{{ route('logout') }}" method="POST" class="m-0">
+            @csrf
+            <button type="button" 
+                    onclick="openConfirmModal('logout')" 
+                    class="w-full bg-white border border-gray-100 text-red-500 text-xs font-bold py-3.5 px-4 rounded-[20px] shadow-sm hover:bg-red-50/40 active:scale-[0.99] transition-all cursor-pointer">
+              {{ __('messages.settings.logout') }}
+            </button>
+          </form>
 
-        <!-- 💡 JS不要：Laravelのアカウント削除処理（DELETEリクエスト用フォーム） -->
-        <form action="{{ route('profile.destroy') }}" method="POST" class="text-center m-0">
-          @csrf
-          @method('DELETE') <!-- 安全な削除リクエストのためにDELETEメソッドを指定 -->
-          <button type="submit" class="text-[11px] font-semibold text-gray-400 hover:text-red-500 underline transition-colors cursor-pointer bg-transparent border-0 p-0">
-            {{__('messages.settings.delete_account')}}
-          </button>
-        </form>
+          <!-- アカウント削除ボタン -->
+          <form id="delete-account-form" action="{{ route('profile.destroy') }}" method="POST" class="text-center m-0">
+            @csrf
+            @method('DELETE')
+            <button type="button" 
+                    onclick="openConfirmModal('delete')" 
+                    class="text-[11px] font-semibold text-gray-400 hover:text-red-500 underline transition-colors cursor-pointer bg-transparent border-0 p-0">
+              {{ __('messages.settings.delete_account') }}
+            </button>
+          </form>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- 2. カスタム確認モーダル（アプリデザイン共通） -->
+        <!-- ========================================== -->
+        <div id="custom-confirm-modal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-200">
+          
+          <div id="modal-card" class="bg-white rounded-[28px] p-6 max-w-xs w-full shadow-2xl border border-gray-100 text-center space-y-4 transform scale-95 transition-all duration-200">
+            
+            <!-- 警告アイコン背景 -->
+            <div class="w-12 h-12 bg-red-50 text-red-500 rounded-2xl flex items-center justify-center mx-auto text-lg">
+              <i id="modal-icon" class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+
+            <!-- メッセージ文言 -->
+            <div class="space-y-1">
+              <h3 id="modal-title" class="text-base font-bold text-gray-800"></h3>
+              <p id="modal-message" class="text-xs text-gray-400 font-medium leading-relaxed px-2"></p>
+            </div>
+
+            <!-- ボタンエリア -->
+            <div class="grid grid-cols-2 gap-2.5 pt-2">
+              <!-- キャンセルボタン -->
+              <button type="button" 
+                      onclick="closeConfirmModal()" 
+                      class="w-full bg-gray-100 text-gray-600 text-xs font-bold py-3 rounded-2xl hover:bg-gray-200 active:scale-95 transition-all cursor-pointer">
+                {{ __('messages.settings.cancel') ?? 'Cancel' }}
+              </button>
+
+              <!-- 実行ボタン -->
+              <button type="button" 
+                      id="modal-confirm-btn" 
+                      onclick="submitActiveForm()" 
+                      class="w-full bg-red-500 text-white text-xs font-bold py-3 rounded-2xl shadow-md shadow-red-500/20 hover:bg-red-600 active:scale-95 transition-all cursor-pointer">
+                {{ __('messages.settings.confirm') ?? 'OK' }}
+              </button>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- 3. 制御用JavaScript -->
+        <!-- ========================================== -->
+        <script>
+          let targetFormId = '';
+
+          // 翻訳データをJSへ定義（3言語自動対応）
+          const modalTranslations = {
+            logout: {
+              title: @json(__('messages.settings.logout')),
+              message: @json(__('messages.settings.confirm_logout')),
+              icon: 'fa-solid fa-right-from-bracket'
+            },
+            delete: {
+              title: @json(__('messages.settings.delete_account')),
+              message: @json(__('messages.settings.confirm_delete_account')),
+              icon: 'fa-solid fa-triangle-exclamation'
+            }
+          };
+
+          // モーダルを開く処理
+          function openConfirmModal(type) {
+            const modal = document.getElementById('custom-confirm-modal');
+            const modalCard = document.getElementById('modal-card');
+            const titleEl = document.getElementById('modal-title');
+            const msgEl = document.getElementById('modal-message');
+            const iconEl = document.getElementById('modal-icon');
+
+            if (type === 'logout') {
+              targetFormId = 'logout-form';
+              titleEl.innerText = modalTranslations.logout.title;
+              msgEl.innerText = modalTranslations.logout.message;
+              iconEl.className = modalTranslations.logout.icon;
+            } else if (type === 'delete') {
+              targetFormId = 'delete-account-form';
+              titleEl.innerText = modalTranslations.delete.title;
+              msgEl.innerText = modalTranslations.delete.message;
+              iconEl.className = modalTranslations.delete.icon;
+            }
+
+            // 表示アニメーション
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modalCard.classList.remove('scale-95');
+            modalCard.classList.add('scale-100');
+          }
+
+          // モーダルを閉じる処理
+          function closeConfirmModal() {
+            const modal = document.getElementById('custom-confirm-modal');
+            const modalCard = document.getElementById('modal-card');
+
+            modalCard.classList.remove('scale-100');
+            modalCard.classList.add('scale-95');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            targetFormId = '';
+          }
+
+          // フォーム実行
+          function submitActiveForm() {
+            if (targetFormId) {
+              document.getElementById(targetFormId).submit();
+            }
+          }
+        </script>
         
       </div>
 

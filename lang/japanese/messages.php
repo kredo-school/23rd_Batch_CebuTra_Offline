@@ -60,6 +60,10 @@ return [
         'terms'            => '利用規約と免責事項',
         'logout'           => 'ログアウト',
         'delete_account'   => 'アカウント削除',
+        'confirm_logout'   => 'ログアウトしますか？',
+        'confirm_delete_account' => '本当にアカウントを削除しますか？この操作は取り消せません。',
+        'cancel'           => 'キャンセル',
+        'confirm'          => '実行する',
 
     ],
 
