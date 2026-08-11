@@ -59,7 +59,11 @@ return [
         'help_center'      => 'Help Center & Contacts',
         'terms'            => 'Terms & Disclaimers',
         'logout'           => 'Log Out',
-        'delete_account'   => 'Delete Account(Unregister)'
+        'delete_account'   => 'Delete Account(Unregister)',
+        'confirm_logout'   => 'Are you sure you want to log out?',
+        'confirm_delete_account' => 'Are you sure you want to delete your account? This action cannot be undone.',
+        'cancel'           => 'Cancel',
+        'confirm'          => 'Confirm',
     ],
 
 

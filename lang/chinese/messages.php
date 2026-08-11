@@ -60,6 +60,10 @@ return [
         'terms'            => '使用条款和免责声明',
         'logout'           => '退出登录',
         'delete_account'   => '账户删除',
+        'confirm_logout'   => '确定要退出登录吗？',
+        'confirm_delete_account' => '确定要删除账号吗？此操作无法撤销。',
+        'cancel'           => '取消',
+        'confirm'          => '确认',
     ],
 
 

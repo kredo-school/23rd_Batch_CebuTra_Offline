@@ -34,7 +34,7 @@
       </div>
 
       <div class="flex justify-between items-center mt-2">
-        <a href="{{ route('profile') }}" class="text-gray-500 hover:text-gray-800 transition-all text-sm font-bold flex items-center gap-1">
+        <a href="{{ route('all-settings') }}" class="text-gray-500 hover:text-gray-800 transition-all text-sm font-bold flex items-center gap-1">
           <i class="fa-solid fa-chevron-left text-xs"></i> {{ __('messages.profile.title') }}
         </a>
         <h1 class="text-base font-bold text-gray-800">{{ __('messages.emergency.title') }}</h1>
