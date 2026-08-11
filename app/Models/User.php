@@ -68,19 +68,13 @@ class User extends Authenticatable
         'instagram_visibility', 
         'avatar_url',
         
-        // 'name',
-        // 'email',
-        // 'password',
-        // 'gender',
-        // 'nationality',
-        // 'native_language',
-        // 'school',
-        // 'english_level',
-        // 'residing_area',
-        // 'stay_duration',
-        // 'hobbies',
-        // 'avatar_path',
     ];
+
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new ResetPasswordEnglish($token));
+    }
 }
+
 
     

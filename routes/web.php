@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\PasswordResetController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TripController;
 use App\Http\Controllers\FavoriteController;
@@ -15,23 +16,52 @@ use App\Http\Controllers\ItineraryItemController;
 // ---------------------------------------------------------------------------
 // Public routes – the first page the user sees
 // ---------------------------------------------------------------------------
-Route::get('/', function () {
-    return view('welcome');
-})->name('welcome');
 
-Route::get('/login', function () {
-    return view('auth.login');
-})->name('login');
-Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
+Route::view('/', 'welcome')->name('welcome');
 
-Route::get('/register', function () {
-    return view('auth.register');
-})->name('register');
-Route::post('/register', [RegisterController::class, 'register'])->name('register.submit');
-// Password reset request (placeholder view)
-Route::get('/password/request', function () {
-    return view('auth.passwords.email');
-})->name('password.request');
+// 2. ログイン・登録画面（GET表示）
+Route::get('/login', [AuthController::class, 'showAuthForm'])->name('login.view');
+
+// 3. フォームデータ送信（POST処理）
+Route::post('/signup', [AuthController::class, 'signup'])->name('signup.post');
+Route::post('/login', [AuthController::class, 'login'])->name('login.post');
+
+// Route::get('/', function () {
+//     return view('welcome');
+// })->name('welcome');
+
+// Route::get('/login', function () {
+//     return view('auth.login');
+// })->name('login');
+// Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
+
+// Route::get('/register', function () {
+//     return view('auth.register');
+// })->name('register');
+// Route::post('/register', [RegisterController::class, 'register'])->name('register.submit');
+// // Password reset request (placeholder view)
+// Route::get('/password/request', function () {
+//     return view('auth.passwords.email');
+// })->name('password.request');
+
+
+// Route::middleware('guest')->group(function () {
+//     // 1. Show "Forgot Password" link request form
+//     Route::get('/forgot-password', [PasswordResetController::class, 'showForgotPasswordForm'])
+//         ->name('password.request');
+
+//     // 2. Handle sending the reset link email
+//     Route::post('/forgot-password', [PasswordResetController::class, 'sendResetLinkEmail'])
+//         ->name('password.email');
+
+//     // 3. Show password reset form (triggered by link in email)
+//     Route::get('/reset-password/{token}', [PasswordResetController::class, 'showResetPasswordForm'])
+//         ->name('password.reset');
+
+//     // 4. Handle updating the password in DB
+//     Route::post('/reset-password', [PasswordResetController::class, 'resetPassword'])
+//         ->name('password.update');
+
 
 // ---------------------------------------------------------------------------
 // Auth‑protected routes (main application)
