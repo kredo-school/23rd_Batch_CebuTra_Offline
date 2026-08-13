@@ -9,75 +9,35 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Storage;
 
+
 class ProfileController extends Controller
 {
     /**
-     * Create a new controller instance.
-     */
-    public function __construct()
-    {
-        // Require auth except for testing mockups easily if needed,
-        // but let's keep standard Laravel middleware.
-        $this->middleware('auth');
-    }
-
-    /**
-     * Helper to get active user or mock fallback.
-     */
-    private function getUser()
-    {
-        $user = Auth::user();
-        if (!$user) {
-            // Mock object for demonstration
-            $user = (object)[
-                'name' => 'Sakura',
-                'email' => 'sakura@example.com',
-                'gender' => 'Female',
-                'age' => 22,
-                'nationality' => 'Japan',
-                'school' => 'EV Academy',
-                'english_level' => 'Intermediate (B1)',
-                'current_area' => 'Around IT Park',
-                'instagram' => 'sakura_cebu',
-                'bio' => 'Studying English in Cebu! Enjoying island trips on weekends 🌴 Looking for friendly companions to go to Oslob and Moalboal!'
-            ];
-        } else {
-            // Add custom attributes if missing on real user to prevent errors
-            if (!isset($user->gender)) $user->gender = 'Female';
-            if (!isset($user->age)) $user->age = 22;
-            if (!isset($user->nationality)) $user->nationality = 'Japan';
-            if (!isset($user->school)) $user->school = 'EV Academy';
-            if (!isset($user->english_level)) $user->english_level = 'Intermediate (B1)';
-            if (!isset($user->current_area)) $user->current_area = 'Around IT Park';
-            if (!isset($user->instagram)) $user->instagram = 'sakura_cebu';
-            if (!isset($user->bio)) $user->bio = 'Studying English in Cebu! Enjoying island trips on weekends 🌴 Looking for friendly companions to go to Oslob and Moalboal!';
-        }
-        return $user;
-    }
-
-    /**
-     * Display the user's profile.
+     * プロフィール表示画面 (profile.blade.php)
      */
     public function show()
     {
-        $user = $this->getUser();
-        return view('auth.profile.profile', compact('user'));
+        $user = Auth::user();
+        return view('profile.profile', compact('user'));
     }
 
     /**
-     * Show the form for editing the user's profile.
+     * プロフィール編集画面 (profile-edit.blade.php)
      */
     public function edit()
     {
-        $user = $this->getUser();
-        return view('auth.profile.profile-edit', compact('user'));
+        $user = Auth::user();
+        return view('profile.profile-edit', compact('user'));
     }
 
     /**
-     * Update the user's profile.
+     * プロフィール更新処理（Form送信の受け皿）
      */
     public function update(Request $request)
     {
+        $user = Auth::user();
+
+        // 1. 入力データのバリデーション
         $validated = $request->validate([
             'name'                 => 'required|string|max:50',
             'bio'                  => 'nullable|string|max:500',
@@ -121,18 +81,43 @@ class ProfileController extends Controller
 
         // 5. 保存完了後、プロフィール画面（一覧）へリダイレクト
         return redirect()->route('profile')->with('success', __('messages.profile.updated_success') ?? 'Profile updated successfully!');
-
-        
-        // Perform simple validation and update if logged in
-        // $user = Auth::user();
-        // if ($user) {
-        //     $user->update($request->only('name', 'email'));
-        //     // Save other profile attributes if schema exists
-        // }
-        
-        // return redirect()->route('profile.show')->with('status', 'Profile updated successfully!');
     }
 
+    /**
+     * 設定画面の表示
+     */
+    public function settings()
+    {
+        return view('setting.all-settings');
+    }
+
+    /**
+     * 緊急連絡先画面の表示
+     */
+    public function emergency()
+    {
+        return view('setting.emergency-contacts');
+    }
+
+    /**
+     * ヘルプセンター画面の表示
+     */
+    public function helpCenter()
+    {
+        return view('setting.help-center');
+    }
+
+    /**
+     * 利用規約＆免責事項画面の表示
+     */
+    public function terms()
+    {
+        return view('setting.terms');
+    }
+
+    /**
+     * アカウント削除 ＆ ログアウト
+     */
     public function destroy(Request $request)
     {
         $user = Auth::user();
@@ -140,41 +125,44 @@ class ProfileController extends Controller
             $user->delete();
         }
 
-        // ログアウトとセッション破棄
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        // 💡 ログアウト後に auth ルート（auth.blade.php）へ飛ばす
         return redirect()->route('auth')->with('status', 'Your account has been deleted.');
     }
 
     /**
-     * Display settings page.
+     * 言語設定画面の表示
      */
-    public function settings()
+    public function editLanguage()
     {
-        return view('auth.Setting.setting-all');
+        return view('setting.language');
     }
 
     /**
-     * Setting subpages
+     * 言語設定の更新（POST）
      */
-    public function emergency()
+    public function updateLanguage(Request $request)
     {
-        return view('auth.Setting.emergency-contact');
-    }
+        $request->validate([
+            'locale' => 'required|in:english,japanese,chinese',
+        ]);
 
-    public function help()
-    {
-        return view('auth.Setting.help-contact');
+        session(['locale' => $request->locale]);
+        App::setLocale($request->locale);
+
+        return redirect()->route('all-settings');
     }
 
     public function instagram()
     {
-        return view('auth.Setting.instagram-setting');
+        return view('setting.instagram');
     }
 
+    /**
+     * Instagram設定の単体更新処理
+     */
     public function updateInstagram(Request $request)
     {
         $request->validate([
@@ -182,37 +170,219 @@ class ProfileController extends Controller
             'visibility_timing'  => 'required|in:always,matched',
         ]);
 
-        $user = auth()->user();
+        $user = Auth::user();
         $user->instagram_username = $request->instagram_username;
         $user->instagram_visibility = $request->visibility_timing;
         $user->save();
 
         return redirect()->route('profile')->with('success', 'Instagram settings updated!');
     }
-
-    public function editLanguage()
-    {
-        return view('auth.Setting.language');
-    }
-
-    public function updateLanguage(Request $request)
-    {
-        $request->validate([
-            'locale' => 'required|in:english,japanese,chinese',
-        ]);
-
-        // セッションに選択した言語を保存
-        session(['locale' => $request->locale]);
-        
-        // 選択された言語をアプリケーションに即座に反映
-        App::setLocale($request->locale);
-
-        // 設定一覧画面へ戻る（メッセージ等を付与してもOK）
-        return redirect()->route('all-settings');
-    }
-
-    public function terms()
-    {
-        return view('auth.Setting.terms');
-    }
 }
+
+// class ProfileController extends Controller
+// {
+//     /**
+//      * Create a new controller instance.
+//      */
+//     public function __construct()
+//     {
+//         // Require auth except for testing mockups easily if needed,
+//         // but let's keep standard Laravel middleware.
+//         $this->middleware('auth');
+//     }
+
+//     /**
+//      * Helper to get active user or mock fallback.
+//      */
+//     private function getUser()
+//     {
+//         $user = Auth::user();
+//         if (!$user) {
+//             // Mock object for demonstration
+//             $user = (object)[
+//                 'name' => 'Sakura',
+//                 'email' => 'sakura@example.com',
+//                 'gender' => 'Female',
+//                 'age' => 22,
+//                 'nationality' => 'Japan',
+//                 'school' => 'EV Academy',
+//                 'english_level' => 'Intermediate (B1)',
+//                 'current_area' => 'Around IT Park',
+//                 'instagram' => 'sakura_cebu',
+//                 'bio' => 'Studying English in Cebu! Enjoying island trips on weekends 🌴 Looking for friendly companions to go to Oslob and Moalboal!'
+//             ];
+//         } else {
+//             // Add custom attributes if missing on real user to prevent errors
+//             if (!isset($user->gender)) $user->gender = 'Female';
+//             if (!isset($user->age)) $user->age = 22;
+//             if (!isset($user->nationality)) $user->nationality = 'Japan';
+//             if (!isset($user->school)) $user->school = 'EV Academy';
+//             if (!isset($user->english_level)) $user->english_level = 'Intermediate (B1)';
+//             if (!isset($user->current_area)) $user->current_area = 'Around IT Park';
+//             if (!isset($user->instagram)) $user->instagram = 'sakura_cebu';
+//             if (!isset($user->bio)) $user->bio = 'Studying English in Cebu! Enjoying island trips on weekends 🌴 Looking for friendly companions to go to Oslob and Moalboal!';
+//         }
+//         return $user;
+//     }
+
+//     /**
+//      * Display the user's profile.
+//      */
+//     public function show()
+//     {
+//         $user = $this->getUser();
+//         return view('auth.profile.profile', compact('user'));
+//     }
+
+//     /**
+//      * Show the form for editing the user's profile.
+//      */
+//     public function edit()
+//     {
+//         $user = $this->getUser();
+//         return view('auth.profile.profile-edit', compact('user'));
+//     }
+
+//     /**
+//      * Update the user's profile.
+//      */
+//     public function update(Request $request)
+//     {
+//         $validated = $request->validate([
+//             'name'                 => 'required|string|max:50',
+//             'bio'                  => 'nullable|string|max:500',
+//             'school'               => 'nullable|string|max:100',
+//             'english_level'        => 'nullable|string',
+//             'current_area'         => 'nullable|string',
+//             'age'                  => 'nullable|integer|min:0|max:120',
+//             'gender'               => 'nullable|string',
+//             'nationality'          => 'nullable|string|max:50',
+//             'native_lang'          => 'nullable|string|max:50',
+//             'email'                => [
+//                 'required', 'string', 'email', 'max:255',
+//                 Rule::unique('users', 'email')->ignore($user->id),
+//             ],
+//             'instagram_username'   => 'nullable|string|max:100|regex:/^[a-zA-Z0-9._]+$/',
+//             // 💡 unllable のスペルミスを nullable に修正
+//             'instagram_visibility' => 'nullable|in:always,matched_only,private,matched',
+//             'avatar'               => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048', // 画像アップロード対応
+//         ], [
+//             'instagram_username.regex' => __('messages.profile.invalid_username'),
+//         ]);
+
+//         // 2. Instagram ユーザー名の整形（@マークの削除）
+//         if (!empty($validated['instagram_username'])) {
+//             $validated['instagram_username'] = ltrim(trim($validated['instagram_username']), '@');
+//         }
+
+//         // 3. アバター画像のアップロード処理
+//         if ($request->hasFile('avatar')) {
+//             // 古い画像が存在すれば削除
+//             if ($user->avatar_url) {
+//                 Storage::disk('public')->delete($user->avatar_url);
+//             }
+//             // storage/app/public/avatars に保存
+//             $path = $request->file('avatar')->store('avatars', 'public');
+//             $validated['avatar_url'] = $path;
+//         }
+
+//         // 4. DBを一括更新
+//         $user->update($validated);
+
+//         // 5. 保存完了後、プロフィール画面（一覧）へリダイレクト
+//         return redirect()->route('profile')->with('success', __('messages.profile.updated_success') ?? 'Profile updated successfully!');
+
+        
+//         // Perform simple validation and update if logged in
+//         // $user = Auth::user();
+//         // if ($user) {
+//         //     $user->update($request->only('name', 'email'));
+//         //     // Save other profile attributes if schema exists
+//         // }
+        
+//         // return redirect()->route('profile.show')->with('status', 'Profile updated successfully!');
+//     }
+
+//     public function destroy(Request $request)
+//     {
+//         $user = Auth::user();
+//         if ($user) {
+//             $user->delete();
+//         }
+
+//         // ログアウトとセッション破棄
+//         Auth::logout();
+//         $request->session()->invalidate();
+//         $request->session()->regenerateToken();
+
+//         // 💡 ログアウト後に auth ルート（auth.blade.php）へ飛ばす
+//         return redirect()->route('auth')->with('status', 'Your account has been deleted.');
+//     }
+
+//     /**
+//      * Display settings page.
+//      */
+//     public function settings()
+//     {
+//         return view('auth.Setting.setting-all');
+//     }
+
+//     /**
+//      * Setting subpages
+//      */
+//     public function emergency()
+//     {
+//         return view('auth.Setting.emergency-contact');
+//     }
+
+//     public function help()
+//     {
+//         return view('auth.Setting.help-contact');
+//     }
+
+//     public function instagram()
+//     {
+//         return view('auth.Setting.instagram-setting');
+//     }
+
+//     public function updateInstagram(Request $request)
+//     {
+//         $request->validate([
+//             'instagram_username' => 'nullable|string|max:255',
+//             'visibility_timing'  => 'required|in:always,matched',
+//         ]);
+
+//         $user = auth()->user();
+//         $user->instagram_username = $request->instagram_username;
+//         $user->instagram_visibility = $request->visibility_timing;
+//         $user->save();
+
+//         return redirect()->route('profile')->with('success', 'Instagram settings updated!');
+//     }
+
+//     public function editLanguage()
+//     {
+//         return view('auth.Setting.language');
+//     }
+
+//     public function updateLanguage(Request $request)
+//     {
+//         $request->validate([
+//             'locale' => 'required|in:english,japanese,chinese',
+//         ]);
+
+//         // セッションに選択した言語を保存
+//         session(['locale' => $request->locale]);
+        
+//         // 選択された言語をアプリケーションに即座に反映
+//         App::setLocale($request->locale);
+
+//         // 設定一覧画面へ戻る（メッセージ等を付与してもOK）
+//         return redirect()->route('all-settings');
+//     }
+
+//     public function terms()
+//     {
+//         return view('auth.Setting.terms');
+//     }
+// }

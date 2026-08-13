@@ -7,6 +7,8 @@ use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Notifications\ResetPasswordEnglish;
+
 
 class User extends Authenticatable
 {
@@ -68,19 +70,13 @@ class User extends Authenticatable
         'instagram_visibility', 
         'avatar_url',
         
-        // 'name',
-        // 'email',
-        // 'password',
-        // 'gender',
-        // 'nationality',
-        // 'native_language',
-        // 'school',
-        // 'english_level',
-        // 'residing_area',
-        // 'stay_duration',
-        // 'hobbies',
-        // 'avatar_path',
     ];
+
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new ResetPasswordEnglish($token));
+    }
 }
+
 
     
