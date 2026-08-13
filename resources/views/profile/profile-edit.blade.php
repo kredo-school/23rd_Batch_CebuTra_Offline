@@ -20,13 +20,13 @@
 </head>
 <body class="flex justify-center items-center min-h-screen bg-gray-100 p-0 sm:p-4">
 
-  <!-- 💡 画像アップロードのために enctype="multipart/form-data" を追加 -->
-  <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data" class="w-full max-w-[412px] bg-[#FFFBF3] h-screen sm:h-[840px] shadow-2xl relative flex flex-col justify-between overflow-hidden sm:rounded-[40px]">
+  <!-- 外枠コンテナ（ sm:h-[720px] 内でスクロール処理 ） -->
+  <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data" class="w-full max-w-[412px] bg-[#FFFBF3] h-screen sm:h-[720px] shadow-2xl relative flex flex-col justify-between overflow-hidden sm:rounded-[36px]">
     @csrf
     
     <!-- 1. ヘッダー（上部固定） -->
-    <div class="bg-white pt-10 pb-4 px-4 border-b border-gray-100 z-20 flex-shrink-0 relative">
-      <div class="flex justify-between items-center absolute top-3 left-6 right-6 text-xs font-semibold text-gray-800">
+    <div class="bg-white pt-9 pb-3.5 px-4 border-b border-gray-100 z-20 flex-shrink-0 relative">
+      <div class="flex justify-between items-center absolute top-2.5 left-5 right-5 text-xs font-semibold text-gray-800">
         <div>9:41</div>
         <div class="flex items-center space-x-1">
           <i class="fa-solid fa-signal text-[10px]"></i>
@@ -47,10 +47,10 @@
       </div>
     </div>
 
-    <!-- 2. 入力フォーム領域（スクロールエリア） -->
-    <div class="flex-1 overflow-y-auto no-scrollbar p-5 space-y-6 pb-32">
+    <!-- 2. 入力フォーム領域（大きめの余白とテキストでゆったりスクロール可能） -->
+    <div class="flex-1 overflow-y-auto no-scrollbar p-5 space-y-6 pb-28">
       
-      <!-- 💡 エラー内容の詳細を表示 -->
+      <!-- エラー表示 -->
       @if ($errors->any())
         <div class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-2xl text-xs space-y-1">
           <p class="font-bold flex items-center gap-1.5"><i class="fa-solid fa-triangle-exclamation"></i> 入力内容を確認してください</p>
@@ -62,9 +62,8 @@
         </div>
       @endif
 
-      <!-- 💡 アバター画像選択エリア -->
+      <!-- アバター画像選択エリア（w-24 h-24 で大きく表示） -->
       <div class="flex flex-col items-center justify-center space-y-2 py-2">
-        <!-- 非表示のファイル選択input -->
         <input type="file" id="avatar-input" name="avatar" accept="image/*" class="hidden" onchange="previewImage(event)">
 
         <label for="avatar-input" class="relative group cursor-pointer">
@@ -86,7 +85,7 @@
       </div>
 
       <!-- Basic Info -->
-      <div class="space-y-4">
+      <div class="space-y-3">
         <h3 class="text-xs font-bold text-gray-400 tracking-wider uppercase px-1">{{__('messages.edit_profile.basic_info')}}</h3>
         <div class="bg-white rounded-3xl p-4 shadow-sm border border-gray-100/50 space-y-4">
           <div>
@@ -101,7 +100,7 @@
       </div>
 
       <!-- Study & Stay Info -->
-      <div class="space-y-4">
+      <div class="space-y-3">
         <h3 class="text-xs font-bold text-gray-400 tracking-wider uppercase px-1">{{__('messages.edit_profile.study_info')}}</h3>
         <div class="bg-white rounded-3xl p-4 shadow-sm border border-gray-100/50 space-y-4">
           <div>
@@ -124,26 +123,90 @@
             </div>
           </div>
           <div>
-            <label class="block text-xs font-bold text-gray-500 mb-1.5 ml-0.5">{{__('messages.edit_profile.current_area')}}</label>
-            <div class="relative">
-              <select name="current_area" class="w-full bg-gray-50 border border-gray-100 rounded-xl py-2.5 pl-3.5 pr-10 text-sm focus:outline-none focus:border-[#008080] focus:bg-white transition-all text-gray-800 font-bold appearance-none">
-                @php $area = old('current_area', $user->current_area ?? 'IT Park'); @endphp
-                <option value="IT Park" {{ $area === 'IT Park' ? 'selected' : '' }}>Around IT Park</option>
-                <option value="Cebu City Center" {{ $area === 'Cebu City Center' ? 'selected' : '' }}>Cebu City Center</option>
-                <option value="Mactan" {{ $area === 'Mactan' ? 'selected' : '' }}>Mactan Island (Resort Area)</option>
-                <option value="Mandaue" {{ $area === 'Mandaue' ? 'selected' : '' }}>Mandaue City</option>
-                <option value="Others" {{ $area === 'Others' ? 'selected' : '' }}>Others</option>
-              </select>
-              <div class="absolute inset-y-0 right-0 flex items-center pr-3.5 pointer-events-none text-gray-400 text-xs">
-                <i class="fa-solid fa-chevron-down"></i>
+
+            <label class="block text-xs font-bold text-gray-500 mb-1.5 ml-0.5">{{ __('messages.edit_profile.current_area') }}</label>
+
+            @php
+              $currentArea = old('current_area', $user->current_area ?? 'IT Park');
+              $presetAreas = ['IT Park', 'Cebu City Center', 'Mactan', 'Mandaue'];
+              $isCustom = !in_array($currentArea, $presetAreas);
+            @endphp
+
+            <div class="space-y-2">
+              <div class="relative">
+                <select 
+                  id="current_area_select" 
+                  onchange="toggleCustomAreaInput(this)" 
+                  class="w-full bg-gray-50 border border-gray-100 rounded-xl py-2.5 pl-3.5 pr-10 text-sm focus:outline-none focus:border-[#008080] focus:bg-white transition-all text-gray-800 font-bold appearance-none"
+                >
+                  <option value="IT Park" {{ $currentArea === 'IT Park' ? 'selected' : '' }}>Around IT Park</option>
+                  <option value="Cebu City Center" {{ $currentArea === 'Cebu City Center' ? 'selected' : '' }}>Cebu City Center</option>
+                  <option value="Mactan" {{ $currentArea === 'Mactan' ? 'selected' : '' }}>Mactan Island (Resort Area)</option>
+                  <option value="Mandaue" {{ $currentArea === 'Mandaue' ? 'selected' : '' }}>Mandaue City</option>
+                  <option value="custom" {{ $isCustom ? 'selected' : '' }}>Others (Type directly)</option>
+                </select>
+                
+                <div class="absolute inset-y-0 right-0 flex items-center pr-3.5 pointer-events-none text-gray-400 text-xs">
+                  <i class="fa-solid fa-chevron-down"></i>
+                </div>
+              </div>
+
+              <div id="custom_area_container" class="{{ $isCustom ? '' : 'hidden' }}">
+                <input 
+                  type="text" 
+                  id="custom_area_input"
+                  name="current_area" 
+                  value="{{ $currentArea }}" 
+                  placeholder="e.g. Talamban, Lapu-Lapu" 
+                  class="w-full bg-gray-50 border border-gray-100 rounded-xl py-2.5 px-3.5 text-sm focus:outline-none focus:border-[#008080] focus:bg-white transition-all text-gray-800 font-bold"
+                >
               </div>
             </div>
+
+            <script>
+              function toggleCustomAreaInput(select) {
+                const customContainer = document.getElementById('custom_area_container');
+                const customInput = document.getElementById('custom_area_input');
+
+                if (select.value === 'custom') {
+                  customContainer.classList.remove('hidden');
+                  customInput.name = 'current_area';
+                  customInput.focus();
+                } else {
+                  customContainer.classList.add('hidden');
+                  customInput.name = '';
+                  
+                  let hiddenInput = document.getElementById('hidden_area_input');
+                  if (!hiddenInput) {
+                    hiddenInput = document.createElement('input');
+                    hiddenInput.type = 'hidden';
+                    hiddenInput.id = 'hidden_area_input';
+                    hiddenInput.name = 'current_area';
+                    select.parentNode.appendChild(hiddenInput);
+                  }
+                  hiddenInput.value = select.value;
+                }
+              }
+
+              document.addEventListener("DOMContentLoaded", function() {
+                const select = document.getElementById('current_area_select');
+                if (select.value !== 'custom') {
+                  let hiddenInput = document.createElement('input');
+                  hiddenInput.type = 'hidden';
+                  hiddenInput.id = 'hidden_area_input';
+                  hiddenInput.name = 'current_area';
+                  hiddenInput.value = select.value;
+                  select.parentNode.appendChild(hiddenInput);
+                }
+              });
+            </script>
+
           </div>
         </div>
       </div>
 
       <!-- Other Details -->
-      <div class="space-y-4">
+      <div class="space-y-3">
         <h3 class="text-xs font-bold text-gray-400 tracking-wider uppercase px-1">{{__('messages.edit_profile.other_details')}}</h3>
         <div class="bg-white rounded-3xl p-4 shadow-sm border border-gray-100/50 space-y-4">
           <div class="grid grid-cols-2 gap-3">
@@ -200,7 +263,7 @@
    
   </form>
 
-  <!-- 💡 画像プレビュー用JavaScript -->
+  <!-- 画像プレビュー用JavaScript -->
   <script>
     function previewImage(event) {
       const file = event.target.files[0];

@@ -13,18 +13,18 @@ class HomeController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+     *///@return void
+     /*///
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
+    // /**
+    //  * Show the application dashboard.
+    //  *
+    //  * @return \Illuminate\Contracts\Support\Renderable
+    //  */
     
 
 
@@ -74,6 +74,9 @@ class HomeController extends Controller
                     'condition'  => $this->getCondition($code),
                 ];
             }
+        } else {
+        // 💡 API取得失敗時のフォールバックデータ（表示崩れ防止）
+        $forecasts = $this->getFallbackForecasts($currentDays);
         }
 
         return view('home', compact('forecasts'));
@@ -90,6 +93,27 @@ class HomeController extends Controller
         } else {
             return ['key' => 'messages.weather.rain', 'icon' => 'fa-cloud-showers-heavy text-blue-400'];
         }
+    }
+
+    private function getFallbackForecasts($currentDays)
+    {
+        $fallback = [];
+        for ($i = 0; $i < 5; $i++) {
+            $date = Carbon::now('Asia/Manila')->addDays($i);
+            $fallback[] = [
+                'date'     => $date->format('m/d'),
+                'day_name' => $currentDays[$date->dayOfWeek],
+                'is_today' => $i === 0,
+                'temp_max' => 31,
+                'temp_min' => 25,
+                'pop'      => 20,
+                'condition' => [
+                    'key'  => 'messages.weather.clear',
+                    'icon' => 'fa-sun text-[#FFB03A]'
+                ],
+            ];
+        }
+        return $fallback;
     }
 }
 

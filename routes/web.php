@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -12,6 +13,7 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\EventCreateController;
 use App\Http\Controllers\ItineraryController;
 use App\Http\Controllers\ItineraryItemController;
+
 
 // ---------------------------------------------------------------------------
 // Public routes – the first page the user sees
@@ -25,6 +27,10 @@ Route::get('/login', [AuthController::class, 'showAuthForm'])->name('login.view'
 // 3. フォームデータ送信（POST処理）
 Route::post('/signup', [AuthController::class, 'signup'])->name('signup.post');
 Route::post('/login', [AuthController::class, 'login'])->name('login.post');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
+});
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -45,23 +51,23 @@ Route::post('/login', [AuthController::class, 'login'])->name('login.post');
 // })->name('password.request');
 
 
-// Route::middleware('guest')->group(function () {
-//     // 1. Show "Forgot Password" link request form
-//     Route::get('/forgot-password', [PasswordResetController::class, 'showForgotPasswordForm'])
-//         ->name('password.request');
+Route::middleware('guest')->group(function () {
+    // 1. Show "Forgot Password" link request form
+    Route::get('/forgot-password', [PasswordResetController::class, 'showForgotPasswordForm'])
+        ->name('password.request');
 
-//     // 2. Handle sending the reset link email
-//     Route::post('/forgot-password', [PasswordResetController::class, 'sendResetLinkEmail'])
-//         ->name('password.email');
+    // 2. Handle sending the reset link email
+    Route::post('/forgot-password', [PasswordResetController::class, 'sendResetLinkEmail'])
+        ->name('password.email');
 
-//     // 3. Show password reset form (triggered by link in email)
-//     Route::get('/reset-password/{token}', [PasswordResetController::class, 'showResetPasswordForm'])
-//         ->name('password.reset');
+    // 3. Show password reset form (triggered by link in email)
+    Route::get('/reset-password/{token}', [PasswordResetController::class, 'showResetPasswordForm'])
+        ->name('password.reset');
 
-//     // 4. Handle updating the password in DB
-//     Route::post('/reset-password', [PasswordResetController::class, 'resetPassword'])
-//         ->name('password.update');
-
+    // 4. Handle updating the password in DB
+    Route::post('/reset-password', [PasswordResetController::class, 'resetPassword'])
+        ->name('password.update');
+});
 
 // ---------------------------------------------------------------------------
 // Auth‑protected routes (main application)
@@ -69,7 +75,7 @@ Route::post('/login', [AuthController::class, 'login'])->name('login.post');
 Route::middleware(['auth'])->group(function () {
     // Home / Trip related routes
     // Route::get('/home', [HomeController::class, 'index'])->name('home');
-    Route::get('/home', [TripController::class, 'index'])->name('home');
+    Route::get('/trips/home', [TripController::class, 'index'])->name('trips.home');
     Route::get('/search', [TripController::class, 'search'])->name('trips.search');
     Route::post('/post', [TripController::class, 'store'])->name('trips.store');
     Route::post('/trips/{id}/join', [TripController::class, 'join'])->name('trips.join');
@@ -77,9 +83,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/trips/{id}/favorite', [FavoriteController::class, 'toggle'])->name('trips.favorite');
 
     // Profile basic routes
-    Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
+    Route::get('/profile', [ProfileController::class, 'show'])->name('profile');
     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
 
     // Settings (simple pages)
     Route::get('/settings', [ProfileController::class, 'settings'])->name('settings.all');

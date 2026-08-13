@@ -72,7 +72,7 @@
             <i class="fa-solid fa-map text-lg"></i>
             <span class="text-[10px] {{ Route::is('itineraries.*') ? 'font-bold' : 'font-medium' }} mt-0.5">Itinerary</span>
           </a>
-          <a href="{{ route('profile.show') }}" class="flex flex-col items-center justify-center w-14 py-1 {{ Route::is('profile.*') ? 'text-[#008080] font-bold' : 'text-gray-400' }}">
+          <a href="{{ route('profile') }}" class="flex flex-col items-center justify-center w-14 py-1 {{ Route::is('profile.*') ? 'text-[#008080] font-bold' : 'text-gray-400' }}">
             <i class="fa-solid fa-user text-lg"></i>
             <span class="text-[10px] {{ Route::is('profile.*') ? 'font-bold' : 'font-medium' }} mt-0.5">Profile</span>
           </a>

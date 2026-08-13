@@ -1,4 +1,4 @@
-<!-- <?php
+<?php
 
 namespace App\Http\Controllers\Auth;
 
@@ -75,4 +75,4 @@ class PasswordResetController extends Controller
             ? redirect()->route('login')->with('status', __($status))
             : back()->withErrors(['email' => __($status)]);
     }
-} -->
+}
