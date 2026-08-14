@@ -121,27 +121,113 @@ Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
 // ---------------------------------------------------------------------------
 // Event routes
 // ---------------------------------------------------------------------------
-Route::get('/events', [EventController::class, 'index'])->name('events.index');
-Route::post('/events/store', [EventCreateController::class, 'store'])->name('events.store');
-Route::get('/events/create/step1', [EventCreateController::class, 'step1'])->name('events.create.step1');
-Route::post('/events/create/step1', [EventCreateController::class, 'storestep1'])->name('storestep1');
-Route::get('/events/create/step2', [EventCreateController::class, 'step2'])->name('events.create.step2');
-Route::post('/events/create/step2', [EventCreateController::class, 'storestep2'])->name('storestep2');
-Route::get('/events/create/step3', [EventCreateController::class, 'step3'])->name('events.create.step3');
-Route::post('/events/create/step3', [EventCreateController::class, 'storestep3'])->name('storestep3');
-Route::get('/events/create/step4', [EventCreateController::class, 'step4'])->name('events.create.step4');
-Route::post('/events/create/step4', [EventCreateController::class, 'storestep4'])->name('storestep4');
-Route::get('/events/{id}', [EventController::class, 'show'])->name('events.show');
+
+
+// ========================================
+// イベント一覧
+// ========================================
+
+Route::get(
+    '/events',
+    [EventController::class, 'index']
+)->name('events.index');
+
+
+// ========================================
+// イベント作成 Step1
+// ========================================
+
+Route::get(
+    '/events/create/step1',
+    [EventCreateController::class, 'step1']
+)->name('events.create.step1');
+
+Route::post(
+    '/events/create/step1',
+    [EventCreateController::class, 'storeStep1']
+)->name('events.create.step1.store');
+
+
+// ========================================
+// イベント作成 Step2
+// ========================================
+
+Route::get(
+    '/events/create/step2',
+    [EventCreateController::class, 'step2']
+)->name('events.create.step2');
+
+Route::post(
+    '/events/create/step2',
+    [EventCreateController::class, 'storeStep2']
+)->name('events.create.step2.store');
+
+
+// ========================================
+// イベント作成 Step3
+// ========================================
+
+Route::get(
+    '/events/create/step3',
+    [EventCreateController::class, 'step3']
+)->name('events.create.step3');
+
+Route::post(
+    '/events/create/step3',
+    [EventCreateController::class, 'storeStep3']
+)->name('events.create.step3.store');
+
+
+// ========================================
+// イベント作成 Step4
+// ========================================
+
+Route::get(
+    '/events/create/step4',
+    [EventCreateController::class, 'step4']
+)->name('events.create.step4');
+
+
+// ========================================
+// イベント最終保存
+// ========================================
+
+Route::post(
+    '/events/store',
+    [EventCreateController::class, 'store']
+)->name('events.store');
+
+
+// ========================================
+// イベント詳細
+// ========================================
+
+Route::get(
+    '/events/{event}',
+    [EventController::class, 'show']
+)->name('events.show');
+
+//Route::get('/events', [EventController::class, 'index'])->name('events.index');
+//Route::post('/events/store', [EventCreateController::class, 'store'])->name('events.store');
+//Route::get('/events/create/step1', [EventCreateController::class, 'step1'])->name('events.create.step1');
+//Route::post('/events/create/step1', [EventCreateController::class, 'storestep1'])->name('storestep1');
+//Route::get('/events/create/step2', [EventCreateController::class, 'step2'])->name('events.create.step2');
+//Route::post('/events/create/step2', [EventCreateController::class, 'storestep2'])->name('storestep2');
+//Route::get('/events/create/step3', [EventCreateController::class, 'step3'])->name('events.create.step3');
+//Route::post('/events/create/step3', [EventCreateController::class, 'storestep3'])->name('storestep3');
+//Route::get('/events/create/step4', [EventCreateController::class, 'step4'])->name('events.create.step4');
+//Route::post('/events/create/step4', [EventCreateController::class, 'storestep4'])->name('storestep4');
+//Route::get('/events/{id}', [EventController::class, 'show'])->name('events.show');
 
 // ---------------------------------------------------------------------------
 // Itinerary routes (auth protected)
 // ---------------------------------------------------------------------------
-Route::middleware(['auth'])->group(function () {
+//Route::middleware(['auth'])->group(function () {
     Route::resource('itineraries', ItineraryController::class);
     Route::post('/itineraries/{trip}/items', [ItineraryItemController::class, 'store'])->name('items.store');
     Route::put('/items/{item}', [ItineraryItemController::class, 'update'])->name('items.update');
     Route::delete('/items/{item}', [ItineraryItemController::class, 'destroy'])->name('items.destroy');
-});
+//});
 
 // Route::middleware(['auth'])->group(function () {
 //     Route::get('/', [TripController::class, 'index'])->name('home');
@@ -169,12 +255,4 @@ Route::middleware(['auth'])->group(function () {
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-#旅程作成ページ
-Route::middleware('auth')->group(function(){
-    //旅程
-    Route::resource('itineraries',ItineraryController::class);
-    //アクティビティ
-    Route::post('/itineraries/{trip}/items',[ItineraryItemController::class,'store'])->name('items.store');
-    Route::put('/items/{item}',[ItineraryItemController::class,'update'])->name('items.update');
-    Route::delete('/items/{item}',[ItineraryItemController::class,'destroy'])->name('items.destroy');
-});
+
