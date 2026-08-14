@@ -22,9 +22,13 @@ class ItineraryItem extends Model
     ];
 
     protected $casts = [
-        'time' => 'datetime:H:i',
+        'day' => 'integer',
+        'sort_order' => 'integer',
     ];
 
+    /**
+     * この予定が属している旅程
+     */
     public function trip(): BelongsTo
     {
         return $this->belongsTo(Trip::class);

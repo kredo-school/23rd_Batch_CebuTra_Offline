@@ -29,25 +29,46 @@ class Event extends Model
         'capacity' => 'integer',
     ];
 
+    /**
+     * 主催者
+     */
     public function host(): BelongsTo
     {
-        return $this->belongsTo(User::class,'host_id');
+        return $this->belongsTo(User::class, 'host_id');
     }
+
+    /**
+     * 添付された旅程
+     */
     public function trip(): BelongsTo
     {
         return $this->belongsTo(Trip::class);
     }
 
+    /**
+     * イベントに紐づくタグ
+     */
     public function tags(): BelongsToMany
     {
-        return $this->belongsToMany(Tag::class,'event_tags')
-        ->withTimestamps();
+        return $this->belongsToMany(
+            Tag::class,
+            'event_tags',
+            'event_id',
+            'tag_id'
+        )->withTimestamps();
     }
 
+    /**
+     * イベント参加者
+     */
     public function participants(): BelongsToMany
     {
-        return $this->belongsToMany(User::class,'event_participants')
-        ->withTimestamps();
+        return $this->belongsToMany(
+            User::class,
+            'event_participants',
+            'event_id',
+            'user_id'
+        )->withTimestamps();
     }
 }
 

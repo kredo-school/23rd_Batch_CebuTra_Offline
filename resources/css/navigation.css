@@ -1,0 +1,326 @@
+/* ========================================
+   CebuTra 共通アプリレイアウト
+======================================== */
+
+
+/* ----------------------------------------
+   ページ全体
+---------------------------------------- */
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+
+    min-height: 100%;
+
+    background: #f8f4ee;
+
+    font-family:
+        "Noto Sans JP",
+        "Nunito",
+        sans-serif;
+}
+
+
+body {
+    color: #252337;
+}
+
+
+/* ----------------------------------------
+   アプリ全体
+---------------------------------------- */
+
+.app-container {
+    width: 100%;
+    min-height: 100vh;
+
+    background: #f8f4ee;
+}
+
+
+/* ----------------------------------------
+   メインコンテンツ
+---------------------------------------- */
+
+.app-main {
+    width: 100%;
+
+    /*
+     * 下部ナビゲーションと
+     * コンテンツが重ならないようにする
+     */
+    padding-bottom: 92px;
+
+    box-sizing: border-box;
+}
+
+
+/* ----------------------------------------
+   下部ナビゲーション
+---------------------------------------- */
+
+.bottom-navigation {
+
+    position: fixed;
+
+    left: 50%;
+    bottom: 0;
+
+    transform: translateX(-50%);
+
+    z-index: 1000;
+
+    width: 100%;
+    max-width: 625px;
+
+    height: 88px;
+
+    background: #ffffff;
+
+    border-top: 1px solid #eeeeee;
+
+    border-radius: 18px 18px 0 0;
+
+    box-shadow:
+        0 -3px 15px rgba(0, 0, 0, 0.08);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    padding:
+        8px 8px
+        env(safe-area-inset-bottom);
+
+    box-sizing: border-box;
+}
+
+
+/* ----------------------------------------
+   ナビゲーション各項目
+---------------------------------------- */
+
+.bottom-nav-item {
+
+    position: relative;
+
+    width: 20%;
+    height: 72px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 5px;
+
+    color: #77716c;
+
+    text-decoration: none;
+
+    border-radius: 8px;
+
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease;
+}
+
+
+/* アイコン */
+
+.bottom-nav-item > i {
+
+    font-size: 25px;
+
+    line-height: 1;
+}
+
+
+/* テキスト */
+
+.bottom-nav-item > span:not(.create-button) {
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    line-height: 1.2;
+}
+
+
+/* ----------------------------------------
+   選択中
+---------------------------------------- */
+
+.bottom-nav-item.active {
+
+    color: #008f8c;
+
+    background: #ffffff;
+
+    border: 2px solid #75c9c7;
+}
+
+
+/* ----------------------------------------
+   募集ボタン
+---------------------------------------- */
+
+.bottom-nav-item.create-item {
+
+    color: #ff6045;
+
+    justify-content: center;
+
+    gap: 3px;
+
+    /*
+     * Figmaの中央ボタンを少し上に
+     */
+    margin-top: -12px;
+}
+
+
+/* ＋ボタン */
+
+.create-button {
+
+    width: 68px;
+    height: 68px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #ff5b3d;
+
+    color: #ffffff;
+
+    border-radius: 22px;
+
+    box-shadow:
+        0 5px 14px rgba(255, 91, 61, 0.30);
+}
+
+
+/* ＋アイコン */
+
+.create-button i {
+
+    font-size: 32px;
+
+}
+
+
+/* 募集テキスト */
+
+.create-label {
+
+    color: #ff5b3d;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    line-height: 1;
+}
+
+
+/* ----------------------------------------
+   スマートフォン
+---------------------------------------- */
+
+@media (max-width: 767px) {
+
+    .bottom-navigation {
+
+        height: 86px;
+
+        border-radius: 18px 18px 0 0;
+
+    }
+
+
+    .bottom-nav-item {
+
+        height: 70px;
+
+    }
+
+
+    .bottom-nav-item > i {
+
+        font-size: 23px;
+
+    }
+
+
+    .bottom-nav-item > span:not(.create-button) {
+
+        font-size: 12px;
+
+    }
+
+
+    .create-button {
+
+        width: 62px;
+        height: 62px;
+
+        border-radius: 20px;
+
+    }
+
+
+    .create-button i {
+
+        font-size: 30px;
+
+    }
+
+}
+
+
+/* ----------------------------------------
+   小さいスマートフォン
+---------------------------------------- */
+
+@media (max-width: 390px) {
+
+    .bottom-navigation {
+
+        height: 82px;
+
+        padding-left: 4px;
+        padding-right: 4px;
+
+    }
+
+
+    .bottom-nav-item > i {
+
+        font-size: 21px;
+
+    }
+
+
+    .bottom-nav-item > span:not(.create-button) {
+
+        font-size: 11px;
+
+    }
+
+
+    .create-button {
+
+        width: 58px;
+        height: 58px;
+
+        border-radius: 19px;
+
+    }
+
+}

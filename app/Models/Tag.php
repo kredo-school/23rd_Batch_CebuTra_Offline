@@ -14,10 +14,17 @@ class Tag extends Model
         'name',
     ];
 
+    /**
+     * このタグが付いているイベント
+     */
     public function events(): BelongsToMany
     {
-        return $this->belongsToMany(Event::class,'event_tags')
-        ->withTimestamos();
+        return $this->belongsToMany(
+            Event::class,
+            'event_tags',
+            'tag_id',
+            'event_id'
+        )->withTimestamps();
     }
 }
 
